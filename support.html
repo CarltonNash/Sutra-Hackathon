@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sutrā — Support a Creator</title>
+<style>
+/* =========================================================
+   SUTRĀ SUPPORT PAGE
+========================================================= */
+:root {
+    --brown-dark: #3b2418;
+    --brown: #6b4532;
+    --brown-light: #8b6048;
+    --cream: #f7efe3;
+    --beige: #ead8c2;
+    --sand: #dfc4a5;
+    --white: #fffaf4;
+    --text: #342219;
+    --green: #65734d;
+    --shadow: 0 10px 30px rgba(59,36,24,0.12);
+}
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: var(--cream);
+    color: var(--text);
+}
+/* =========================================================
+   HEADER
+========================================================= */
+header {
+    background: var(--brown-dark);
+    color: var(--cream);
+    padding: 18px 6%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.logo {
+    font-size: 30px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+.logo span {
+    font-size: 12px;
+    letter-spacing: 1px;
+    display: block;
+    opacity: 0.7;
+}
+.back-btn {
+    background: transparent;
+    border: 1px solid rgba(247,239,227,0.6);
+    color: var(--cream);
+    padding: 9px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    transition: 0.3s;
+}
+.back-btn:hover {
+    background: var(--cream);
+    color: var(--brown-dark);
+}
+/* =========================================================
+   HERO
+========================================================= */
+.hero {
+    text-align: center;
+    padding: 70px 20px 50px;
+    background:
+        radial-gradient(circle at top left, rgba(223,196,165,0.45), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(139,96,72,0.12), transparent 35%);
+}
+.hero-heart {
+    font-size: 45px;
+    margin-bottom: 12px;
+}
+.hero h1 {
+    font-size: clamp(38px, 6vw, 65px);
+    color: var(--brown-dark);
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+.hero p {
+    max-width: 650px;
+    margin: auto;
+    line-height: 1.7;
+    font-size: 17px;
+    color: var(--brown);
+}
+.hero-line {
+    width: 80px;
+    height: 2px;
+    background: var(--brown-light);
+    margin: 25px auto;
+}
+/* =========================================================
+   ARTIST SECTION
+========================================================= */
+.container {
+    width: min(1200px, 90%);
+    margin: auto;
+}
+.section-title {
+    text-align: center;
+    margin: 20px 0 35px;
+}
+.section-title h2 {
+    font-size: 30px;
+    color: var(--brown-dark);
+}
+.section-title p {
+    margin-top: 8px;
+    color: var(--brown-light);
+}
+/* =========================================================
+   ARTIST GRID
+========================================================= */
+.artist-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding-bottom: 70px;
+}
+.artist-card {
+    background: var(--white);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+.artist-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 16px 40px rgba(59,36,24,0.18);
+}
+.artist-image {
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+}
+.artist-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.verified {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: var(--cream);
+    color: var(--green);
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+.artist-info {
+    padding: 22px;
+}
+.artist-info h3 {
+    font-size: 23px;
+    margin-bottom: 5px;
+    color: var(--brown-dark);
+}
+.artist-type {
+    color: var(--brown-light);
+    font-size: 14px;
+    margin-bottom: 14px;
+}
+.artist-story {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #5c4638;
+    min-height: 65px;
+}
+.progress-area {
+    margin-top: 20px;
+}
+.progress-top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    margin-bottom: 7px;
+}
+.progress-bar {
+    width: 100%;
+    height: 8px;
+    background: var(--beige);
+    border-radius: 20px;
+    overflow: hidden;
+}
+.progress-fill {
+    height: 100%;
+    background: var(--brown);
+    border-radius: 20px;
+}
+.card-button {
+    width: 100%;
+    margin-top: 18px;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background: var(--brown-dark);
+    color: var(--cream);
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.3s;
+}
+.card-button:hover {
+    background: var(--brown);
+}
+/* =========================================================
+   PROFILE PAGE
+========================================================= */
+.profile-page {
+    display: none;
+    padding: 50px 0 80px;
+}
+.profile-wrapper {
+    width: min(1000px, 92%);
+    margin: auto;
+}
+.profile-top {
+    display: grid;
+    grid-template-columns: 330px 1fr;
+    gap: 45px;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.profile-photo {
+    height: 380px;
+    border-radius: 25px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+.profile-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.profile-details h1 {
+    font-size: 45px;
+    color: var(--brown-dark);
+    margin-bottom: 8px;
+}
+.profile-details .profession {
+    color: var(--brown-light);
+    font-size: 17px;
+    margin-bottom: 22px;
+}
+.profile-details p {
+    line-height: 1.8;
+    color: #5c4638;
+}
+.verified-large {
+    display: inline-block;
+    margin-top: 18px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    background: #e4ead8;
+    color: var(--green);
+    font-size: 13px;
+    font-weight: bold;
+}
+/* =========================================================
+   PROFILE SECTIONS
+========================================================= */
+.info-box {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 20px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow);
+}
+.info-box h2 {
+    color: var(--brown-dark);
+    margin-bottom: 15px;
+    font-size: 25px;
+}
+.info-box p {
+    line-height: 1.8;
+    color: #5c4638;
+}
+/* =========================================================
+   PROOF
+========================================================= */
+.proof-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap: 15px;
+}
+.proof-item {
+    border: 1px solid var(--beige);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    background: var(--cream);
+}
+.proof-icon {
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+.proof-item strong {
+    display: block;
+    margin-bottom: 6px;
+}
+.proof-item span {
+    font-size: 12px;
+    color: var(--brown-light);
+}
+/* =========================================================
+   FUNDING
+========================================================= */
+.funding-box {
+    background: var(--brown-dark);
+    color: var(--cream);
+    padding: 35px;
+    border-radius: 22px;
+    margin-top: 25px;
+}
+.funding-box h2 {
+    font-size: 27px;
+    margin-bottom: 20px;
+}
+.big-progress {
+    height: 13px;
+    background: rgba(247,239,227,0.2);
+    border-radius: 20px;
+    overflow: hidden;
+}
+.big-progress-fill {
+    height: 100%;
+    background: var(--sand);
+    border-radius: 20px;
+}
+.funding-numbers {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 12px;
+    font-size: 14px;
+}
+/* =========================================================
+   DONATION AREA
+========================================================= */
+.donate-box {
+    background: var(--white);
+    padding: 35px;
+    border-radius: 22px;
+    margin-top: 25px;
+    box-shadow: var(--shadow);
+}
+.donate-box h2 {
+    color: var(--brown-dark);
+    margin-bottom: 8px;
+}
+.donate-box p {
+    color: var(--brown-light);
+    margin-bottom: 20px;
+}
+.amount-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.amount-btn {
+    padding: 12px 20px;
+    border: 1px solid var(--brown-light);
+    background: transparent;
+    color: var(--brown-dark);
+    border-radius: 25px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.2s;
+}
+.amount-btn:hover,
+.amount-btn.selected {
+    background: var(--brown-dark);
+    color: var(--cream);
+}
+.custom-amount {
+    width: 100%;
+    margin-top: 15px;
+    padding: 13px;
+    border: 1px solid var(--beige);
+    border-radius: 10px;
+    font-family: inherit;
+    background: var(--cream);
+}
+.help-button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 18px;
+    border: none;
+    border-radius: 30px;
+    background: var(--brown-dark);
+    color: var(--cream);
+    font-family: inherit;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.help-button:hover {
+    background: var(--brown);
+    transform: translateY(-2px);
+}
+/* =========================================================
+   PAYMENT MODAL
+========================================================= */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(40,25,17,0.65);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+.modal-content {
+    background: var(--white);
+    width: min(470px, 100%);
+    padding: 35px;
+    border-radius: 25px;
+    position: relative;
+    animation: pop 0.25s ease;
+}
+@keyframes pop {
+    from {
+        transform: scale(0.92);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    border: none;
+    background: none;
+    font-size: 25px;
+    cursor: pointer;
+    color: var(--brown-dark);
+}
+.modal-content h2 {
+    color: var(--brown-dark);
+    margin-bottom: 8px;
+}
+.modal-subtitle {
+    color: var(--brown-light);
+    margin-bottom: 22px;
+}
+.payment-summary {
+    background: var(--cream);
+    padding: 18px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+.payment-summary strong {
+    display: block;
+    margin-bottom: 5px;
+}
+.payment-input {
+    width: 100%;
+    padding: 13px;
+    margin-bottom: 12px;
+    border: 1px solid var(--beige);
+    border-radius: 10px;
+    font-family: inherit;
+    background: white;
+}
+.pay-button {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 25px;
+    background: var(--brown-dark);
+    color: white;
+    font-family: inherit;
+    cursor: pointer;
+    font-size: 15px;
+}
+/* =========================================================
+   SUCCESS
+========================================================= */
+.success {
+    display: none;
+    text-align: center;
+}
+.success-icon {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+.success h2 {
+    color: var(--brown-dark);
+    margin-bottom: 10px;
+}
+.success p {
+    color: var(--brown-light);
+    line-height: 1.6;
+}
+.continue-button {
+    margin-top: 22px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 25px;
+    background: var(--brown-dark);
+    color: white;
+    cursor: pointer;
+    font-family: inherit;
+}
+/* =========================================================
+   FOOTER
+========================================================= */
+footer {
+    background: var(--brown-dark);
+    color: var(--cream);
+    text-align: center;
+    padding: 35px 20px;
+}
+footer h3 {
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+footer p {
+    margin-top: 8px;
+    opacity: 0.7;
+    font-size: 13px;
+}
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+@media (max-width: 750px) {
+    .profile-top {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+    .profile-photo {
+        height: 300px;
+    }
+    .profile-details h1 {
+        font-size: 36px;
+    }
+    header {
+        padding: 15px 5%;
+    }
+    .logo {
+        font-size: 25px;
+    }
+    .hero {
+        padding-top: 50px;
+    }
+}
+</style>
+</head>
+<body>
+<!-- =======================================================
+     HEADER
+======================================================= -->
+<header>
+    <div class="logo">
+        sutrā
+        <span>stories that deserve to continue</span>
+    </div>
+    <button class="back-btn" onclick="goHome()">
+        ← Back to Sutrā
+    </button>
+</header>
+<!-- =======================================================
+     ARTIST LIST PAGE
+======================================================= -->
+<main id="artistPage">
+<section class="hero">
+    <div class="hero-heart">♡</div>
+    <h1>Support a Creator</h1>
+    <div class="hero-line"></div>
+    <p>
+        Behind every tradition is a person keeping it alive.
+        Discover artists who need support and help their craft
+        continue into another generation.
+    </p>
+</section>
+<section class="container">
+    <div class="section-title">
+        <h2>Creators Seeking Support</h2>
+        <p>
+            Every story deserves the chance to continue.
+        </p>
+    </div>
+    <div class="artist-grid">
+        <!-- =================================================
+             ARTIST 1
+        ================================================== -->
+        <div class="artist-card"
+             onclick="openArtist('ananya')">
+            <div class="artist-image">
+                <img
+                src="https://images.unsplash.com/photo-1582738411706-bfc8e691d1c2?auto=format&fit=crop&w=900&q=80"
+                alt="Traditional textile artist">
+                <div class="verified">
+                    ✓ Proof submitted
+                </div>
+            </div>
+            <div class="artist-info">
+                <h3>Ananya Rao</h3>
+                <div class="artist-type">
+                    Kalamkari Artist · Andhra Pradesh
+                </div>
+                <div class="artist-story">
+                    Preserving a four-generation Kalamkari
+                    tradition while trying to keep her family
+                    workshop running.
+                </div>
+                <div class="progress-area">
+                    <div class="progress-top">
+                        <span>₹18,500 raised</span>
+                        <span>62%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div
+                        class="progress-fill"
+                        style="width:62%">
+                        </div>
+                    </div>
+                </div>
+                <button class="card-button"
+                        onclick="event.stopPropagation(); openArtist('ananya')">
+                    View Ananya's Story →
+                </button>
+            </div>
+        </div>
+        <!-- =================================================
+             ARTIST 2
+        ================================================== -->
+        <div class="artist-card"
+             onclick="openArtist('ravi')">
+            <div class="artist-image">
+                <img
+                src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=900&q=80"
+                alt="Traditional performing artist">
+                <div class="verified">
+                    ✓ Proof submitted
+                </div>
+            </div>
+            <div class="artist-info">
+                <h3>Ravi Naik</h3>
+                <div class="artist-type">
+                    Yakshagana Artisan · Karnataka
+                </div>
+                <div class="artist-story">
+                    Creates traditional Yakshagana costumes
+                    and needs equipment and materials to
+                    continue his craft.
+                </div>
+                <div class="progress-area">
+                    <div class="progress-top">
+                        <span>₹9,200 raised</span>
+                        <span>37%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div
+                        class="progress-fill"
+                        style="width:37%">
+                        </div>
+                    </div>
+                </div>
+                <button class="card-button"
+                        onclick="event.stopPropagation(); openArtist('ravi')">
+                    View Ravi's Story →
+                </button>
+            </div>
+        </div>
+        <!-- =================================================
+             ARTIST 3
+        ================================================== -->
+        <div class="artist-card"
+             onclick="openArtist('meera')">
+            <div class="artist-image">
+                <img
+                src="https://images.unsplash.com/photo-1604881991720-f91add269bed?auto=format&fit=crop&w=900&q=80"
+                alt="Handloom weaver">
+                <div class="verified">
+                    ✓ Proof submitted
+                </div>
+            </div>
+            <div class="artist-info">
+                <h3>Meera Das</h3>
+                <div class="artist-type">
+                    Handloom Weaver · West Bengal
+                </div>
+                <div class="artist-story">
+                    A handloom weaver working to preserve
+                    traditional patterns while supporting
+                    her small family workshop.
+                </div>
+                <div class="progress-area">
+                    <div class="progress-top">
+                        <span>₹24,000 raised</span>
+                        <span>60%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div
+                        class="progress-fill"
+                        style="width:60%">
+                        </div>
+                    </div>
+                </div>
+                <button class="card-button"
+                        onclick="event.stopPropagation(); openArtist('meera')">
+                    View Meera's Story →
+                </button>
+            </div>
+        </div>
+        <!-- =================================================
+             ARTIST 4
+        ================================================== -->
+        <div class="artist-card"
+             onclick="openArtist('zoya')">
+            <div class="artist-image">
+                <img
+                src="https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?auto=format&fit=crop&w=900&q=80"
+                alt="Traditional artist">
+                <div class="verified">
+                    ✓ Proof submitted
+                </div>
+            </div>
+            <div class="artist-info">
+                <h3>Zoya Khan</h3>
+                <div class="artist-type">
+                    Madhubani Artist · Bihar
+                </div>
+                <div class="artist-story">
+                    Turning traditional Madhubani stories
+                    into contemporary artwork while trying
+                    to expand her home studio.
+                </div>
+                <div class="progress-area">
+                    <div class="progress-top">
+                        <span>₹12,750 raised</span>
+                        <span>51%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div
+                        class="progress-fill"
+                        style="width:51%">
+                        </div>
+                    </div>
+                </div>
+                <button class="card-button"
+                        onclick="event.stopPropagation(); openArtist('zoya')">
+                    View Zoya's Story →
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+</main>
+<!-- =======================================================
+     PROFILE PAGE
+======================================================= -->
+<section class="profile-page" id="profilePage">
+<div class="profile-wrapper">
+    <button class="back-btn"
+            style="background:var(--brown-dark); margin-bottom:30px;"
+            onclick="backToArtists()">
+        ← All Creators
+    </button>
+    <div class="profile-top">
+        <div class="profile-photo">
+            <img id="profileImage"
+                 src=""
+                 alt="Artist">
+        </div>
+        <div class="profile-details">
+            <h1 id="profileName">
+                Artist Name
+            </h1>
+            <div class="profession"
+                 id="profileProfession">
+            </div>
+            <p id="profileIntro">
+            </p>
+            <div class="verified-large">
+                ✓ Identity & supporting documents submitted
+            </div>
+        </div>
+    </div>
+    <!-- STORY -->
+    <div class="info-box">
+        <h2>The Story</h2>
+        <p id="profileStory"></p>
+    </div>
+    <!-- NEED -->
+    <div class="info-box">
+        <h2>What Your Support Will Help With</h2>
+        <p id="profileNeed"></p>
+    </div>
+    <!-- PROOF -->
+    <div class="info-box">
+        <h2>Proof & Verification</h2>
+        <p style="margin-bottom:20px;">
+            Supporting documents have been submitted for
+            review. This prototype displays the type of
+            verification information a real platform could
+            provide.
+        </p>
+        <div class="proof-grid">
+            <div class="proof-item">
+                <div class="proof-icon">📄</div>
+                <strong>Identity Proof</strong>
+                <span>
+                    Document submitted
+                </span>
+            </div>
+            <div class="proof-item">
+                <div class="proof-icon">🏠</div>
+                <strong>Workshop Proof</strong>
+                <span>
+                    Workspace documentation
+                </span>
+            </div>
+            <div class="proof-item">
+                <div class="proof-icon">🎨</div>
+                <strong>Art Practice</strong>
+                <span>
+                    Portfolio submitted
+                </span>
+            </div>
+        </div>
+    </div>
+    <!-- FUNDING -->
+    <div class="funding-box">
+        <h2>Help keep this story going.</h2>
+        <div class="big-progress">
+            <div class="big-progress-fill"
+                 id="profileProgress">
+            </div>
+        </div>
+        <div class="funding-numbers">
+            <span id="profileRaised">
+                ₹0 raised
+            </span>
+            <span id="profileGoal">
+                Goal: ₹0
+            </span>
+        </div>
+    </div>
+    <!-- DONATION -->
+    <div class="donate-box">
+        <h2>Make a Difference</h2>
+        <p>
+            Choose an amount you'd like to contribute.
+        </p>
+        <div class="amount-buttons">
+            <button class="amount-btn"
+                    onclick="selectAmount(100, this)">
+                ₹100
+            </button>
+            <button class="amount-btn"
+                    onclick="selectAmount(500, this)">
+                ₹500
+            </button>
+            <button class="amount-btn"
+                    onclick="selectAmount(1000, this)">
+                ₹1,000
+            </button>
+            <button class="amount-btn"
+                    onclick="selectAmount(2000, this)">
+                ₹2,000
+            </button>
+        </div>
+        <input
+            class="custom-amount"
+            id="customAmount"
+            type="number"
+            placeholder="Or enter a custom amount (₹)"
+            oninput="customAmountChanged()">
+        <button class="help-button"
+                onclick="openPayment()">
+            ♡ Help This Creator
+        </button>
+    </div>
+</div>
+</section>
+<!-- =======================================================
+     PAYMENT MODAL
+======================================================= -->
+<div class="modal" id="paymentModal">
+<div class="modal-content">
+    <button class="close"
+            onclick="closePayment()">
+        ×
+    </button>
+    <!-- PAYMENT FORM -->
+    <div id="paymentForm">
+        <h2>Support <span id="paymentArtist"></span></h2>
+        <p class="modal-subtitle">
+            You're helping keep a cultural story alive.
+        </p>
+        <div class="payment-summary">
+            <strong id="paymentAmount">
+                ₹0
+            </strong>
+            <span>
+                Contribution amount
+            </span>
+        </div>
+        <input
+            class="payment-input"
+            type="text"
+            placeholder="Your name">
+        <input
+            class="payment-input"
+            type="email"
+            placeholder="Email address">
+        <div style="
+            background:#f7efe3;
+            padding:14px;
+            border-radius:12px;
+            margin-bottom:15px;
+            font-size:13px;
+            line-height:1.5;
+        ">
+            <strong>Prototype Payment</strong><br>
+            This is a simulated payment for the Sutrā
+            hackathon demo. No real money will be transferred.
+        </div>
+        <button class="pay-button"
+                onclick="completePayment()">
+            Continue with Demo Payment →
+        </button>
+    </div>
+    <!-- SUCCESS -->
+    <div class="success"
+         id="successScreen">
+        <div class="success-icon">
+            ♡
+        </div>
+        <h2>Thank You</h2>
+        <p id="successMessage">
+            Your support has been recorded.
+        </p>
+        <button class="continue-button"
+                onclick="closePayment()">
+            Continue Exploring
+        </button>
+    </div>
+</div>
+</div>
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+<footer>
+    <h3>sutrā</h3>
+    <p>
+        Discover culture. Support creators. Keep stories alive.
+    </p>
+</footer>
+<script>
+/* =========================================================
+   ARTIST DATA
+========================================================= */
+const artists = {
+    ananya: {
+        name: "Ananya Rao",
+        profession: "Kalamkari Artist · Andhra Pradesh",
+        image:
+        "https://images.unsplash.com/photo-1582738411706-bfc8e691d1c2?auto=format&fit=crop&w=900&q=80",
+        intro:
+        "Ananya comes from a family of traditional Kalamkari artists and is working to keep the family craft alive while adapting to the realities of modern creative work.",
+        story:
+        "For four generations, Ananya's family has practiced Kalamkari — a traditional textile art known for its detailed storytelling and natural-dye techniques. Her family workshop has become a space where younger artists learn the craft. Rising material costs and fewer customers, however, have made it difficult to continue the practice sustainably.",
+        need:
+        "Funds from this campaign would help purchase textile materials, natural dyes, tools and workshop supplies, while also supporting small community workshops where younger artists can learn the technique.",
+        raised: 18500,
+        goal: 30000
+    },
+    ravi: {
+        name: "Ravi Naik",
+        profession: "Yakshagana Artisan · Karnataka",
+        image:
+        "https://images.unsplash.com/photo-1544967082-d9d25d867d66?auto=format&fit=crop&w=900&q=80",
+        intro:
+        "Ravi creates and repairs traditional Yakshagana costumes and accessories used by performers in coastal Karnataka.",
+        story:
+        "Ravi learned the craft by working alongside experienced artisans in his community. His work involves creating elaborate pieces that require patience, specialized materials and traditional techniques. He hopes to continue producing these pieces while passing the knowledge to younger members of his community.",
+        need:
+        "Support will go toward materials, tools, costume components and maintaining his small workspace so he can continue creating traditional Yakshagana pieces.",
+        raised: 9200,
+        goal: 25000
+    },
+    meera: {
+        name: "Meera Das",
+        profession: "Handloom Weaver · West Bengal",
+        image:
+        "https://images.unsplash.com/photo-1604881991720-f91add269bed?auto=format&fit=crop&w=900&q=80",
+        intro:
+        "Meera works with traditional handloom techniques and creates textiles inspired by patterns passed down through her family.",
+        story:
+        "Meera's family has worked with handlooms for decades. She combines traditional motifs with contemporary designs to make the craft accessible to younger audiences. Her small workshop currently supports several pieces of equipment that require maintenance and new materials.",
+        need:
+        "The campaign will help with loom maintenance, yarn and dye purchases, workspace improvements and training materials for younger people interested in learning the craft.",
+        raised: 24000,
+        goal: 40000
+    },
+    zoya: {
+        name: "Zoya Khan",
+        profession: "Madhubani Artist · Bihar",
+        image:
+        "https://images.unsplash.com/photo-1594736797933-d0501ba2fe65?auto=format&fit=crop&w=900&q=80",
+        intro:
+        "Zoya creates Madhubani-inspired artwork that connects traditional visual storytelling with contemporary themes.",
+        story:
+        "Zoya learned traditional painting techniques from artists in her community. Her work uses familiar visual language while exploring new stories and subjects. She is currently working from a small home studio and hopes to expand it into a space where others can also learn.",
+        need:
+        "Support will help purchase painting materials, improve the studio workspace and organize beginner workshops for students interested in traditional art.",
+        raised: 12750,
+        goal: 25000
+    }
+};
+/* =========================================================
+   VARIABLES
+========================================================= */
+let currentArtist = null;
+let selectedAmount = 0;
+/* =========================================================
+   OPEN ARTIST
+========================================================= */
+function openArtist(id) {
+    const artist = artists[id];
+    if (!artist) return;
+    currentArtist = artist;
+    document.getElementById("artistPage").style.display = "none";
+    document.getElementById("profilePage").style.display = "block";
+    document.getElementById("profileName").textContent =
+        artist.name;
+    document.getElementById("profileProfession").textContent =
+        artist.profession;
+    document.getElementById("profileImage").src =
+        artist.image;
+    document.getElementById("profileIntro").textContent =
+        artist.intro;
+    document.getElementById("profileStory").textContent =
+        artist.story;
+    document.getElementById("profileNeed").textContent =
+        artist.need;
+    const percentage =
+        Math.min((artist.raised / artist.goal) * 100, 100);
+    document.getElementById("profileProgress").style.width =
+        percentage + "%";
+    document.getElementById("profileRaised").textContent =
+        "₹" + artist.raised.toLocaleString("en-IN") + " raised";
+    document.getElementById("profileGoal").textContent =
+        "Goal: ₹" + artist.goal.toLocaleString("en-IN");
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+/* =========================================================
+   BACK TO ARTISTS
+========================================================= */
+function backToArtists() {
+    document.getElementById("profilePage").style.display = "none";
+    document.getElementById("artistPage").style.display = "block";
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+}
+/* =========================================================
+   AMOUNT SELECTION
+========================================================= */
+function selectAmount(amount, button) {
+    selectedAmount = amount;
+    document.querySelectorAll(".amount-btn")
+        .forEach(btn => btn.classList.remove("selected"));
+    button.classList.add("selected");
+    document.getElementById("customAmount").value = "";
+}
+/* =========================================================
+   CUSTOM AMOUNT
+========================================================= */
+function customAmountChanged() {
+    const value =
+        Number(document.getElementById("customAmount").value);
+    if (value > 0) {
+        selectedAmount = value;
+        document.querySelectorAll(".amount-btn")
+            .forEach(btn => btn.classList.remove("selected"));
+    }
+}
+/* =========================================================
+   OPEN PAYMENT
+========================================================= */
+function openPayment() {
+    const custom =
+        Number(document.getElementById("customAmount").value);
+    if (custom > 0) {
+        selectedAmount = custom;
+    }
+    if (!selectedAmount || selectedAmount <= 0) {
+        alert("Please choose an amount to support this creator.");
+        return;
+    }
+    document.getElementById("paymentArtist").textContent =
+        currentArtist.name;
+    document.getElementById("paymentAmount").textContent =
+        "₹" + selectedAmount.toLocaleString("en-IN");
+    document.getElementById("paymentModal").style.display =
+        "flex";
+    document.getElementById("paymentForm").style.display =
+        "block";
+    document.getElementById("successScreen").style.display =
+        "none";
+}
+/* =========================================================
+   CLOSE PAYMENT
+========================================================= */
+function closePayment() {
+    document.getElementById("paymentModal").style.display =
+        "none";
+}
+/* =========================================================
+   COMPLETE DEMO PAYMENT
+========================================================= */
+function completePayment() {
+    document.getElementById("paymentForm").style.display =
+        "none";
+    document.getElementById("successScreen").style.display =
+        "block";
+    document.getElementById("successMessage").textContent =
+        "Your demo contribution of ₹" +
+        selectedAmount.toLocaleString("en-IN") +
+        " has been recorded for " +
+        currentArtist.name +
+        ". Thank you for helping keep their story alive.";
+}
+/* =========================================================
+   GO HOME
+========================================================= */
+function goHome() {
+    window.location.href = "index.html";
+}
+/* =========================================================
+   CLOSE MODAL WHEN CLICKING OUTSIDE
+========================================================= */
+window.addEventListener("click", function(event) {
+    const modal =
+        document.getElementById("paymentModal");
+    if (event.target === modal) {
+        closePayment();
+    }
+});
+</script>
+</body>
+</html>

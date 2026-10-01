@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>sutrā — Product Story</title>
+
+<style>
+
+:root {
+    --brown-dark: #3b2418;
+    --brown: #70452d;
+    --brown-light: #9a6748;
+    --beige: #f4ead8;
+    --cream: #fffaf1;
+    --gold: #b78b52;
+    --text: #35231a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+}
+
+/* NAV */
+
+.navbar {
+    height: 75px;
+    background: var(--brown-dark);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7%;
+}
+
+.logo {
+    font-size: 30px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.back {
+    color: white;
+    text-decoration: none;
+}
+
+/* PRODUCT HERO */
+
+.product-container {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 30px;
+}
+
+.product-main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.product-image-large {
+    width: 100%;
+    height: 600px;
+    object-fit: cover;
+    border-radius: 25px;
+    box-shadow: 0 20px 50px rgba(59,36,24,0.16);
+}
+
+.tag {
+    display: inline-block;
+    background: var(--brown-dark);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+h1 {
+    font-size: 55px;
+    line-height: 1;
+    margin: 18px 0;
+}
+
+.origin {
+    color: var(--brown-light);
+    font-size: 15px;
+    margin-bottom: 20px;
+}
+
+.price {
+    font-size: 30px;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+.description {
+    font-family: Arial, sans-serif;
+    line-height: 1.8;
+    color: #675447;
+}
+
+.buy-btn {
+    width: 100%;
+    margin-top: 30px;
+    padding: 18px;
+    background: var(--brown-dark);
+    color: white;
+    border: none;
+    border-radius: 35px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.buy-btn:hover {
+    transform: translateY(-3px);
+    background: var(--brown);
+}
+
+/* STORY */
+
+.story {
+    margin-top: 100px;
+    padding: 65px;
+    border-radius: 25px;
+    background: var(--beige);
+}
+
+.story h2 {
+    font-size: 38px;
+    margin-bottom: 20px;
+}
+
+.story p {
+    font-family: Arial, sans-serif;
+    line-height: 1.9;
+    color: #59483c;
+    max-width: 900px;
+}
+
+/* INFO CARDS */
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.info-card {
+    padding: 25px;
+    border: 1px solid #d9c4a7;
+    border-radius: 18px;
+    background: white;
+}
+
+.info-card h3 {
+    margin-bottom: 10px;
+    color: var(--brown);
+}
+
+.info-card p {
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* SELLER */
+
+.seller {
+    margin-top: 30px;
+    padding: 30px;
+    background: white;
+    border-radius: 20px;
+    border: 1px solid #e2d2bd;
+}
+
+.seller h3 {
+    margin-bottom: 10px;
+}
+
+@media(max-width: 800px) {
+
+    .product-main {
+        grid-template-columns: 1fr;
+    }
+
+    .product-image-large {
+        height: 450px;
+    }
+
+    h1 {
+        font-size: 42px;
+    }
+
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .story {
+        padding: 30px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">sutrā</div>
+
+    <a class="back" href="marketplace.html">
+        ← Back to Marketplace
+    </a>
+
+</nav>
+
+
+<div class="product-container">
+
+    <div class="product-main">
+
+        <div>
+
+            <img
+                id="productImage"
+                class="product-image-large"
+                src=""
+                alt="Cultural product"
+            >
+
+        </div>
+
+
+        <div>
+
+            <span class="tag">
+                HANDMADE • CULTURAL
+            </span>
+
+            <h1 id="productName">
+                Product
+            </h1>
+
+            <div class="origin" id="productOrigin">
+                India
+            </div>
+
+            <div class="price" id="productPrice">
+                ₹0
+            </div>
+
+            <p class="description" id="productDescription">
+            </p>
+
+            <button
+                class="buy-btn"
+                onclick="buyProduct()"
+            >
+                Buy Now →
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <section class="story">
+
+        <h2>
+            The story behind the object
+        </h2>
+
+        <p id="productStory">
+        </p>
+
+
+        <div class="info-grid">
+
+            <div class="info-card">
+
+                <h3>
+                    Origin
+                </h3>
+
+                <p id="originInfo">
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>
+                    Specialty
+                </h3>
+
+                <p id="specialty">
+                </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+                <h3>
+                    Made by
+                </h3>
+
+                <p id="maker">
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="seller">
+
+            <h3>
+                Meet the maker
+            </h3>
+
+            <p id="sellerInfo">
+            </p>
+
+        </div>
+
+    </section>
+
+</div>
+
+
+<script>
+
+const products = {
+
+    kalamkari: {
+
+        name: "Kalamkari Saree",
+
+        origin: "Machilipatnam, Andhra Pradesh",
+
+        price: "₹3,800",
+
+        image:
+        "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=1000&q=80",
+
+        description:
+        "A handcrafted textile inspired by the storytelling traditions of Kalamkari art.",
+
+        story:
+        "Kalamkari is a traditional textile art associated with regions of Andhra Pradesh and Telangana. Artisans traditionally use natural dyes and hand-drawn or block-printed designs to depict stories, figures, plants and symbolic motifs. This piece celebrates the relationship between textile, illustration and storytelling.",
+
+        specialty:
+        "Hand-drawn motifs, natural-dye inspired colours and storytelling imagery.",
+
+        maker:
+        "Independent textile artisan",
+
+        seller:
+        "This product is listed by an independent craft seller working with traditional textile techniques."
+
+    },
+
+
+    bluepottery: {
+
+        name: "Blue Pottery Bowl",
+
+        origin: "Jaipur, Rajasthan",
+
+        price: "₹950",
+
+        image:
+        "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=1000&q=80",
+
+        description:
+        "A decorative blue-and-white ceramic piece inspired by Jaipur's distinctive pottery tradition.",
+
+        story:
+        "Jaipur blue pottery is known for its distinctive blue-and-white visual language. Unlike conventional clay pottery, the craft traditionally uses a quartz-based composition. Floral and geometric designs are common, giving the objects their recognizable appearance.",
+
+        specialty:
+        "Quartz-based craft tradition and distinctive blue floral and geometric patterns.",
+
+        maker:
+        "Independent Jaipur craft studio",
+
+        seller:
+        "Listed by an independent artisan preserving traditional decorative pottery techniques."
+
+    },
+
+
+    dhokra: {
+
+        name: "Dhokra Necklace",
+
+        origin: "Chhattisgarh, India",
+
+        price: "₹1,450",
+
+        image:
+        "https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1000&q=80",
+
+        description:
+        "A handcrafted metal accessory inspired by the ancient lost-wax casting tradition.",
+
+        story:
+        "Dhokra is a metal casting tradition practiced by artisan communities in several parts of India. The lost-wax process involves creating a wax model, covering it with clay and using the resulting mould to cast metal. Each piece can therefore carry subtle variations that reflect its handmade nature.",
+
+        specialty:
+        "Lost-wax casting and distinctive handmade metal textures.",
+
+        maker:
+        "Independent metal artisan",
+
+        seller:
+        "An independent seller working with artisans who continue traditional metal-casting practices."
+
+    },
+
+
+    madhubani: {
+
+        name: "Madhubani Artwork",
+
+        origin: "Bihar, India",
+
+        price: "₹2,200",
+
+        image:
+        "https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=1000&q=80",
+
+        description:
+        "Detailed folk artwork inspired by the visual language of Madhubani painting.",
+
+        story:
+        "Madhubani painting originated in the Mithila region and is recognized for dense compositions, strong outlines and symbolic imagery. Traditional themes can include nature, mythology, celebrations and everyday life.",
+
+        specialty:
+        "Dense patterns, symbolic imagery and distinctive line work.",
+
+        maker:
+        "Independent folk artist",
+
+        seller:
+        "Listed by an independent artist creating contemporary work inspired by Mithila traditions."
+
+    },
+
+
+    bamboo: {
+
+        name: "Handwoven Bamboo Basket",
+
+        origin: "Assam, India",
+
+        price: "₹780",
+
+        image:
+        "https://images.unsplash.com/photo-1590736969955-71cc94901144?auto=format&fit=crop&w=1000&q=80",
+
+        description:
+        "A functional handwoven basket created using traditional bamboo-working techniques.",
+
+        story:
+        "Bamboo has long been used across northeastern India for household objects, storage and architecture. Weaving bamboo into functional objects combines practical knowledge with local material traditions.",
+
+        specialty:
+        "Handwoven construction using locally available bamboo.",
+
+        maker:
+        "Independent bamboo artisan",
+
+        seller:
+        "An independent craft seller supporting traditional bamboo-working skills."
+
+    },
+
+
+    banarasi: {
+
+        name: "Banarasi Dupatta",
+
+        origin: "Varanasi, Uttar Pradesh",
+
+        price: "₹2,750",
+
+        image:
+        "https://images.unsplash.com/photo-1605763240000-7e93b172d754?auto=format&fit=crop&w=1000&q=80",
+
+        description:
+        "A richly woven textile inspired by the historic weaving traditions of Varanasi.",
+
+        story:
+        "Varanasi has a long-standing textile and weaving heritage. Banarasi textiles are particularly associated with elaborate woven designs and metallic-looking zari work. The craft combines detailed pattern-making with specialized weaving knowledge.",
+
+        specialty:
+        "Intricate woven patterns and zari-inspired detailing.",
+
+        maker:
+        "Independent textile weaver",
+
+        seller:
+        "Listed by an independent seller working with traditional textile communities."
+
+    },
+
+
+    terracotta: {
+
+        name: "Terracotta Lamp",
+
+        origin: "West Bengal, India",
+
+        price: "₹620",
+
+        image:
+        "https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=1000&q=80",
+
+        description:
+        "An earthy handmade lamp inspired by India's long tradition of clay craft.",
+
+        story:
+        "Terracotta is one of the oldest forms of ceramic craft and has been used across the Indian subcontinent for functional objects, architecture and decoration. This lamp celebrates the natural texture and warm colour of fired clay.",
+
+        specialty:
+        "Hand-shaped clay and naturally earthy terracotta texture.",
+
+        maker:
+        "Independent pottery artisan",
+
+        seller:
+        "Listed by an independent artisan working with traditional clay techniques."
+
+    },
+
+
+    mask: {
+
+        name: "Hand-carved Wooden Mask",
+
+        origin: "Kerala, India",
+
+        price: "₹1,850",
+
+        image:
+        "https://images.unsplash.com/photo-1577083288073-40892c0860a4?auto=format&fit=crop&w=1000&q=80",
+
+        description:
+        "A decorative wooden piece inspired by South Indian performance traditions.",
+
+        story:
+        "Wood carving has a long history across Kerala and South India. Masks and expressive forms are often connected with performance, storytelling and ritual traditions. This decorative piece takes inspiration from that visual heritage.",
+
+        specialty:
+        "Hand-carved wood and expressive traditional forms.",
+
+        maker:
+        "Independent woodcraft artisan",
+
+        seller:
+        "Listed by an independent craft seller preserving traditional carving techniques."
+
+    }
+
+};
+
+
+/* GET PRODUCT */
+
+const params =
+new URLSearchParams(window.location.search);
+
+const productId =
+params.get("product") || "kalamkari";
+
+const product =
+products[productId];
+
+
+/* DISPLAY */
+
+if(product) {
+
+    document.getElementById("productName")
+        .innerText = product.name;
+
+    document.getElementById("productOrigin")
+        .innerText = product.origin;
+
+    document.getElementById("productPrice")
+        .innerText = product.price;
+
+    document.getElementById("productImage")
+        .src = product.image;
+
+    document.getElementById("productDescription")
+        .innerText = product.description;
+
+    document.getElementById("productStory")
+        .innerText = product.story;
+
+    document.getElementById("originInfo")
+        .innerText = product.origin;
+
+    document.getElementById("specialty")
+        .innerText = product.specialty;
+
+    document.getElementById("maker")
+        .innerText = product.maker;
+
+    document.getElementById("sellerInfo")
+        .innerText = product.seller;
+
+}
+
+
+/* BUY */
+
+function buyProduct() {
+
+    window.location.href =
+        "checkout.html?product=" + productId;
+
+}
+
+</script>
+
+</body>
+</html>

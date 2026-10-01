@@ -1,0 +1,5633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>sutrā — Discover Culture</title>
+
+<style>
+
+/* =========================================================
+   ROOT COLORS
+========================================================= */
+
+:root {
+    --brown-dark: #3b2418;
+    --brown: #6b4226;
+    --brown-light: #9a6a45;
+
+    --beige: #f5efe5;
+    --cream: #fffaf2;
+    --sand: #eadbc8;
+
+    --green-dark: #344833;
+    --green: #526b4d;
+    --green-light: #dbe5d5;
+
+    --text-light: #806653;
+    --border: #dfcfbd;
+
+    --shadow: 0 15px 40px rgba(59,36,24,0.12);
+}
+
+
+/* =========================================================
+   GENERAL
+========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: var(--beige);
+    color: var(--brown-dark);
+    overflow-x: hidden;
+}
+
+button,
+input {
+    font-family: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+section {
+    padding: 80px 7%;
+}
+
+.hidden {
+    display: none !important;
+}
+
+
+/* =========================================================
+   ANIMATIONS
+========================================================= */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes rotateSlow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -500px 0;
+    }
+
+    100% {
+        background-position: 500px 0;
+    }
+}
+
+@keyframes shake {
+
+    0%, 100% {
+        transform: translateX(0);
+    }
+
+    20% {
+        transform: translateX(-10px);
+    }
+
+    40% {
+        transform: translateX(10px);
+    }
+
+    60% {
+        transform: translateX(-7px);
+    }
+
+    80% {
+        transform: translateX(7px);
+    }
+}
+
+@keyframes slideRight {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.animate {
+    animation: fadeUp 0.8s ease forwards;
+}
+
+
+/* =========================================================
+   AUTH PAGE
+========================================================= */
+
+#authPage {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 15% 20%, rgba(82,107,77,0.15), transparent 25%),
+        radial-gradient(circle at 85% 80%, rgba(107,66,38,0.15), transparent 25%),
+        var(--beige);
+}
+
+#authPage::before,
+#authPage::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    border: 1px solid rgba(82,107,77,0.25);
+    animation: rotateSlow 25s linear infinite;
+}
+
+#authPage::before {
+    width: 500px;
+    height: 500px;
+}
+
+#authPage::after {
+    width: 700px;
+    height: 700px;
+    border-color: rgba(107,66,38,0.15);
+    animation-direction: reverse;
+}
+
+.auth-box {
+    width: 390px;
+    max-width: 90%;
+    padding: 45px 35px;
+    background: rgba(255,250,242,0.95);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    position: relative;
+    z-index: 2;
+    animation: fadeUp 0.8s ease;
+    transition: 0.3s ease;
+}
+
+.auth-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(59,36,24,0.18);
+}
+
+.auth-logo {
+    font-size: 58px;
+    font-style: italic;
+    color: var(--green-dark);
+    margin-bottom: 5px;
+    animation: float 4s ease-in-out infinite;
+}
+
+.auth-subtitle {
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+.auth-input {
+    width: 100%;
+    padding: 15px 17px;
+    margin: 7px 0;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--cream);
+    color: var(--brown-dark);
+    outline: none;
+    transition: 0.3s;
+}
+
+.auth-input:focus {
+    border-color: var(--green);
+    box-shadow: 0 0 0 3px rgba(82,107,77,0.12);
+}
+
+.auth-button {
+    width: 100%;
+    padding: 15px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 12px;
+    background: var(--green-dark);
+    color: white;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+.auth-button:hover {
+    background: var(--brown);
+    transform: translateY(-3px);
+}
+
+.auth-switch {
+    margin-top: 20px;
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.auth-switch span {
+    color: var(--green-dark);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-error {
+    display: none;
+    color: #9c3f32;
+    background: #f7dfd9;
+    border-radius: 8px;
+    padding: 9px;
+    margin-top: 8px;
+    font-size: 13px;
+    animation: fadeIn 0.3s ease;
+}
+
+.shake {
+    animation: shake 0.45s ease;
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 18px 7%;
+
+    background: rgba(255,250,242,0.93);
+    backdrop-filter: blur(15px);
+
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    font-size: 32px;
+    font-style: italic;
+    color: var(--green-dark);
+}
+
+.nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: var(--brown-dark);
+    text-decoration: none;
+    position: relative;
+    transition: 0.3s;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    left: 0;
+    bottom: -6px;
+    background: var(--green);
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--green-dark);
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 650px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(circle at 80% 30%, rgba(82,107,77,0.17), transparent 25%),
+        var(--beige);
+}
+
+.hero-content {
+    max-width: 650px;
+    animation: slideRight 1s ease;
+}
+
+.hero h1 {
+    font-size: clamp(55px, 9vw, 100px);
+    line-height: 0.9;
+    font-style: italic;
+    color: var(--brown-dark);
+}
+
+.hero h1 span {
+    color: var(--green);
+}
+
+.hero p {
+    font-size: 19px;
+    line-height: 1.7;
+    color: var(--text-light);
+    margin: 25px 0;
+    max-width: 550px;
+}
+
+.hero-tag {
+    display: inline-block;
+    padding: 8px 15px;
+    border-radius: 50px;
+    background: var(--green-light);
+    color: var(--green-dark);
+    margin-bottom: 20px;
+    font-size: 13px;
+}
+
+.hero-visual {
+    width: 420px;
+    height: 420px;
+    min-width: 300px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+    background: var(--green-light);
+
+    position: relative;
+    animation: float 5s ease-in-out infinite;
+}
+
+.hero-visual::before {
+    content: "";
+    position: absolute;
+    inset: 25px;
+    border: 2px dashed var(--green);
+    border-radius: 50%;
+    animation: rotateSlow 20s linear infinite;
+}
+
+.hero-visual svg {
+    width: 70%;
+    height: 70%;
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+/* =========================================================
+   SUTRĀ SEARCH SYSTEM
+========================================================= */
+
+.sutra-search-wrapper {
+
+    width: 100%;
+    max-width: 850px;
+
+    margin: 30px auto;
+
+    position: relative;
+
+    z-index: 50;
+}
+
+
+/* =========================================================
+   SEARCH BAR
+========================================================= */
+
+.sutra-search-box {
+
+    display: flex;
+
+    align-items: center;
+
+    width: 100%;
+
+    background: #6b4226;
+
+    border: 2px solid rgba(255,255,255,0.15);
+
+    border-radius: 50px;
+
+    padding: 7px 8px 7px 20px;
+
+    box-shadow:
+        0 15px 35px rgba(59,36,24,0.18);
+
+    transition: all 0.3s ease;
+}
+
+
+.sutra-search-box:focus-within {
+
+    transform: translateY(-3px);
+
+    box-shadow:
+        0 20px 45px rgba(59,36,24,0.25);
+}
+
+
+.search-icon {
+
+    color: #fffaf2;
+
+    font-size: 28px;
+
+    margin-right: 10px;
+
+    line-height: 1;
+}
+
+
+#cultureSearch {
+
+    flex: 1;
+
+    border: none;
+
+    outline: none;
+
+    background: transparent;
+
+    color: #fffaf2;
+
+    font-family: inherit;
+
+    font-size: 16px;
+
+    padding: 14px 8px;
+}
+
+
+#cultureSearch::placeholder {
+
+    color: #eadbc8;
+}
+
+
+#searchButton {
+
+    border: none;
+
+    background: #fffaf2;
+
+    color: #6b4226;
+
+    font-family: inherit;
+
+    font-weight: bold;
+
+    padding: 13px 23px;
+
+    border-radius: 40px;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+
+#searchButton:hover {
+
+    background: #dbe5d5;
+
+    transform: scale(1.04);
+}
+
+
+/* =========================================================
+   SUGGESTIONS
+========================================================= */
+
+#searchSuggestions {
+
+    position: absolute;
+
+    left: 15px;
+    right: 15px;
+
+    top: calc(100% + 8px);
+
+    background: #fffaf2;
+
+    border: 1px solid #dfcfbd;
+
+    border-radius: 16px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 15px 35px rgba(59,36,24,0.16);
+
+    display: none;
+}
+
+
+.search-suggestion {
+
+    padding: 14px 18px;
+
+    cursor: pointer;
+
+    border-bottom: 1px solid #eadbc8;
+
+    color: #6b4226;
+
+    transition: all 0.2s ease;
+}
+
+
+.search-suggestion:last-child {
+
+    border-bottom: none;
+}
+
+
+.search-suggestion:hover {
+
+    background: #eef2e9;
+
+    padding-left: 24px;
+}
+
+
+.search-suggestion strong {
+
+    display: block;
+
+    color: #3b2418;
+
+    font-size: 15px;
+}
+
+
+.search-suggestion span {
+
+    font-size: 12px;
+
+    color: #806653;
+}
+
+
+/* =========================================================
+   SEARCH RESULTS AREA
+========================================================= */
+
+#searchResults {
+
+    width: 100%;
+
+    max-width: 1100px;
+
+    margin: 35px auto;
+
+    display: none;
+}
+
+
+/* =========================================================
+   RESULTS HEADING
+========================================================= */
+
+.search-results-heading {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 20px;
+
+    padding: 0 5px;
+}
+
+
+.search-results-heading h3 {
+
+    margin: 0;
+
+    color: #3b2418;
+
+    font-size: 25px;
+}
+
+
+.search-results-heading span {
+
+    color: #806653;
+
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   PINTEREST STYLE GRID
+========================================================= */
+
+.search-result-grid {
+
+    columns: 3 280px;
+
+    column-gap: 22px;
+
+    width: 100%;
+}
+
+
+/* =========================================================
+   CULTURAL CARD
+========================================================= */
+
+.culture-pin {
+
+    display: inline-block;
+
+    width: 100%;
+
+    margin: 0 0 22px;
+
+    break-inside: avoid;
+
+    background: #fffaf2;
+
+    border: 1px solid #dfcfbd;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    box-shadow:
+        0 10px 30px rgba(59,36,24,0.09);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+
+    animation: cultureCardIn 0.5s ease both;
+}
+
+
+.culture-pin:hover {
+
+    transform: translateY(-7px);
+
+    box-shadow:
+        0 20px 40px rgba(59,36,24,0.16);
+}
+
+
+@keyframes cultureCardIn {
+
+    from {
+
+        opacity: 0;
+
+        transform: translateY(20px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform: translateY(0);
+
+    }
+
+}
+
+
+/* =========================================================
+   IMAGE
+========================================================= */
+
+.culture-pin-image {
+
+    position: relative;
+
+    width: 100%;
+
+    overflow: hidden;
+
+    background: #eadbc8;
+}
+
+
+.culture-pin-image img {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    min-height: 220px;
+
+    object-fit: cover;
+
+    transition: transform 0.5s ease;
+}
+
+
+.culture-pin:hover
+.culture-pin-image img {
+
+    transform: scale(1.06);
+}
+
+
+/* =========================================================
+   IMAGE CAPTION
+========================================================= */
+
+.image-caption {
+
+    position: absolute;
+
+    bottom: 12px;
+
+    left: 12px;
+
+    right: 12px;
+
+    padding: 10px 13px;
+
+    background: rgba(59,36,24,0.82);
+
+    backdrop-filter: blur(8px);
+
+    color: #fffaf2;
+
+    border-radius: 12px;
+
+    font-size: 12px;
+
+    line-height: 1.4;
+}
+
+
+.image-caption strong {
+
+    display: block;
+
+    font-size: 14px;
+
+    margin-bottom: 2px;
+}
+
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.culture-pin-content {
+
+    padding: 20px;
+}
+
+
+.culture-pin-state {
+
+    display: inline-block;
+
+    color: #526b4d;
+
+    font-size: 11px;
+
+    font-weight: bold;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1.2px;
+
+    margin-bottom: 7px;
+}
+
+
+.culture-pin-title {
+
+    margin: 0 0 9px;
+
+    color: #3b2418;
+
+    font-size: 22px;
+
+    line-height: 1.2;
+}
+
+
+.culture-pin-description {
+
+    color: #806653;
+
+    font-size: 14px;
+
+    line-height: 1.65;
+
+    margin: 0 0 17px;
+}
+
+
+/* =========================================================
+   CULTURAL TAGS
+========================================================= */
+
+.culture-tags {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-bottom: 18px;
+}
+
+
+.culture-tag {
+
+    padding: 6px 9px;
+
+    border-radius: 20px;
+
+    background: #f5efe5;
+
+    border: 1px solid #dfcfbd;
+
+    color: #6b4226;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+.culture-details {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    padding-top: 14px;
+
+    border-top: 1px solid #eadbc8;
+}
+
+
+.culture-detail {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 12px;
+
+    font-size: 12px;
+}
+
+
+.culture-detail-label {
+
+    color: #806653;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.6px;
+}
+
+
+.culture-detail-value {
+
+    color: #6b4226;
+
+    font-weight: bold;
+
+    text-align: right;
+}
+
+
+/* =========================================================
+   EXPLORE BUTTON
+========================================================= */
+
+.culture-explore {
+
+    width: 100%;
+
+    margin-top: 17px;
+
+    padding: 11px 15px;
+
+    border: none;
+
+    border-radius: 12px;
+
+    background: #6b4226;
+
+    color: #fffaf2;
+
+    font-family: inherit;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    cursor: pointer;
+
+    transition: all 0.25s ease;
+}
+
+
+.culture-explore:hover {
+
+    background: #526b4d;
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   NO RESULTS
+========================================================= */
+
+.no-search-results {
+
+    background: #fffaf2;
+
+    border: 1px solid #dfcfbd;
+
+    border-radius: 22px;
+
+    padding: 45px 30px;
+
+    text-align: center;
+
+    box-shadow:
+        0 12px 30px rgba(59,36,24,0.08);
+}
+
+
+.no-search-results h3 {
+
+    color: #3b2418;
+
+    margin: 0 0 10px;
+
+    font-size: 24px;
+}
+
+
+.no-search-results p {
+
+    color: #806653;
+
+    line-height: 1.6;
+
+    margin: 5px 0;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 750px) {
+
+    .search-result-grid {
+
+        columns: 2 240px;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .sutra-search-box {
+
+        padding-left: 14px;
+    }
+
+
+    #searchButton {
+
+        padding: 12px 15px;
+    }
+
+
+    #cultureSearch {
+
+        font-size: 14px;
+    }
+
+
+    .search-result-grid {
+
+        columns: 1;
+    }
+
+
+    .search-results-heading {
+
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 5px;
+    }
+
+}
+
+/* =========================================================
+   VISUAL ART STRIP
+========================================================= */
+
+.visual-strip {
+    padding: 30px 7% 80px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.art-card {
+    height: 230px;
+    border-radius: 24px;
+    overflow: hidden;
+    position: relative;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    transition: 0.4s;
+}
+
+.art-card:hover {
+    transform: translateY(-10px) rotate(-1deg);
+    box-shadow: var(--shadow);
+}
+
+.art-card:nth-child(even):hover {
+    transform: translateY(-10px) rotate(1deg);
+}
+
+.art-card svg {
+    width: 100%;
+    height: 100%;
+}
+
+.art-label {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background: rgba(255,250,242,0.9);
+    padding: 8px 13px;
+    border-radius: 30px;
+    color: var(--brown-dark);
+    font-size: 13px;
+}
+
+
+/* =========================================================
+   SECTION HEADINGS
+========================================================= */
+
+.section-heading {
+    font-size: clamp(34px, 5vw, 55px);
+    margin-bottom: 12px;
+    color: var(--brown-dark);
+}
+
+.section-description {
+    color: var(--text-light);
+    max-width: 650px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+}
+
+
+/* =========================================================
+   EXPLORER CARDS
+========================================================= */
+
+.explorer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.explorer-card {
+    min-height: 280px;
+    padding: 30px;
+    border-radius: 24px;
+    border: 1px solid var(--border);
+    background: var(--cream);
+    position: relative;
+    overflow: hidden;
+    transition: 0.4s;
+}
+
+.explorer-card::before {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    right: -50px;
+    top: -50px;
+    background: var(--green-light);
+    transition: 0.4s;
+}
+
+.explorer-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow);
+}
+
+.explorer-card:hover::before {
+    transform: scale(1.5);
+}
+
+.explorer-icon {
+    font-size: 45px;
+    color: var(--green);
+    margin-bottom: 30px;
+}
+
+.explorer-card h3 {
+    font-size: 25px;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.explorer-card p {
+    color: var(--text-light);
+    line-height: 1.6;
+    position: relative;
+}
+
+
+/* =========================================================
+   CATEGORIES
+========================================================= */
+
+.categories {
+    background: var(--cream);
+}
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.category {
+    padding: 25px;
+    border-radius: 18px;
+    background: var(--beige);
+    border: 1px solid var(--border);
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.category:hover {
+    background: var(--green-light);
+    transform: translateY(-6px);
+    border-color: var(--green);
+}
+
+.category h3 {
+    margin-top: 15px;
+}
+
+.category p {
+    color: var(--text-light);
+    margin-top: 6px;
+    font-size: 14px;
+}
+
+
+
+/* =========================================================
+   INDIA MAP
+========================================================= */
+
+.map-section {
+    max-width: 800px;
+    margin: 25px auto 5px;
+    padding: 28px;
+    text-align: left;
+    background: var(--paper);
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(59,36,24,0.06);
+}
+
+.map-section h2 {
+    margin-bottom: 10px;
+}
+
+.culture-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.map-section > p {
+    color: var(--brown-soft);
+}
+
+.map-placeholder {
+    margin: 30px auto;
+    width: 100%;
+    max-width: 850px;
+    min-height: 520px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(102,120,95,0.14) 1px,
+            transparent 1px
+        ),
+        var(--sage-pale);
+
+    background-size: 18px 18px;
+    border-radius: 20px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+    overflow: hidden;
+}
+
+/* D3 MAP */
+
+#indiaMap {
+    width: 100%;
+    min-height: 500px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#indiaMap svg {
+    width: 100%;
+    height: auto;
+    max-width: 800px;
+}
+
+/* Individual states */
+
+#indiaMap .state {
+    fill: #d7c2a9;
+    stroke: var(--brown);
+    stroke-width: 1.2px;
+
+    cursor: pointer;
+
+    transition:
+        fill 0.25s ease,
+        stroke-width 0.25s ease,
+        transform 0.25s ease;
+}
+
+#indiaMap .state:hover {
+    fill: var(--sage);
+    stroke-width: 2px;
+}
+
+#indiaMap .state.selected {
+    fill: var(--brown-light);
+    stroke: var(--brown);
+    stroke-width: 2.5px;
+}
+
+/* Map tooltip */
+
+.map-tooltip {
+    position: fixed;
+
+    background: var(--brown);
+    color: var(--paper);
+
+    padding: 9px 14px;
+
+    border-radius: 8px;
+
+    font-size: 14px;
+    font-weight: bold;
+
+    pointer-events: none;
+
+    opacity: 0;
+
+    z-index: 9999;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.2);
+
+    transition: opacity 0.15s ease;
+}
+
+/* Map loading message */
+
+.map-loading {
+    color: var(--brown-soft);
+    font-size: 16px;
+    padding: 30px;
+}
+
+/* Mobile */
+
+@media(max-width:850px) {
+
+    .map-section {
+        margin: 60px 20px;
+        padding: 20px;
+    }
+
+    .map-placeholder {
+        min-height: 400px;
+    }
+
+    #indiaMap {
+        min-height: 380px;
+    }
+
+}
+
+/* =========================================================
+   CREATOR SPOTLIGHT
+========================================================= */
+
+.creator {
+    background: var(--green-dark);
+    color: white;
+    border-radius: 35px;
+    margin: 30px 7%;
+    padding: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+.creator::after {
+    content: "✦";
+    position: absolute;
+    font-size: 300px;
+    right: 30px;
+    top: -80px;
+    color: rgba(255,255,255,0.04);
+    animation: rotateSlow 30s linear infinite;
+}
+
+.creator-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+}
+
+.creator h2 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.creator p {
+    line-height: 1.7;
+    color: #dce5d8;
+}
+
+.creator-button {
+    margin-top: 25px;
+    padding: 13px 22px;
+    border: none;
+    border-radius: 30px;
+    background: var(--cream);
+    color: var(--green-dark);
+    transition: 0.3s;
+}
+
+.creator-button:hover {
+    background: var(--brown);
+    color: white;
+    transform: translateY(-3px);
+}
+
+
+/* =========================================================
+   MARKETPLACE
+========================================================= */
+
+.marketplace {
+    background: var(--cream);
+}
+
+.market-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.market-card {
+    background: var(--beige);
+    border: 1px solid var(--border);
+    border-radius: 25px;
+    overflow: hidden;
+    transition: 0.4s;
+}
+
+.market-card:hover {
+    transform: translateY(-10px);
+    box-shadow: var(--shadow);
+}
+
+.market-image {
+    height: 220px;
+    background: var(--green-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.market-image svg {
+    width: 70%;
+    height: 70%;
+    transition: 0.5s;
+}
+
+.market-card:hover .market-image svg {
+    transform: scale(1.1) rotate(3deg);
+}
+
+.market-info {
+    padding: 22px;
+}
+
+.market-info h3 {
+    margin-bottom: 8px;
+}
+
+.market-info p {
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.price {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--green-dark);
+    font-weight: bold;
+}
+
+
+/* =========================================================
+   GAME
+========================================================= */
+
+.game {
+    background:
+        radial-gradient(circle at 80% 20%, rgba(82,107,77,0.15), transparent 25%),
+        var(--beige);
+    text-align: center;
+}
+
+.quiz-container {
+    max-width: 700px;
+    margin: 40px auto 0;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: var(--shadow);
+}
+
+.quiz-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    color: var(--text-light);
+    font-size: 14px;
+}
+
+.progress-container {
+    height: 8px;
+    background: var(--sand);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 30px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: var(--green);
+    border-radius: 20px;
+    transition: width 0.5s ease;
+}
+
+.quiz-question {
+    font-size: 27px;
+    line-height: 1.4;
+    margin-bottom: 30px;
+}
+
+.quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+.quiz-option {
+    padding: 16px;
+    border: 1px solid var(--border);
+    background: var(--beige);
+    border-radius: 13px;
+    color: var(--brown-dark);
+    transition: 0.3s;
+}
+
+.quiz-option:hover {
+    background: var(--green-light);
+    border-color: var(--green);
+    transform: translateY(-3px);
+}
+
+.quiz-option.correct {
+    background: var(--green);
+    color: white;
+    border-color: var(--green);
+}
+
+.quiz-option.wrong {
+    background: #e8cfc8;
+    border-color: #a95c4c;
+}
+
+.quiz-option:disabled {
+    cursor: default;
+}
+
+.quiz-feedback {
+    min-height: 25px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.score {
+    margin-top: 20px;
+    color: var(--green-dark);
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.restart-button {
+    margin-top: 25px;
+    padding: 13px 25px;
+    border: none;
+    border-radius: 30px;
+    background: var(--green-dark);
+    color: white;
+    display: none;
+}
+
+.restart-button:hover {
+    background: var(--brown);
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    background: var(--brown-dark);
+    color: #e9dccd;
+    padding: 50px 7%;
+    text-align: center;
+}
+
+.footer-logo {
+    font-size: 40px;
+    font-style: italic;
+    color: var(--green-light);
+}
+
+footer p {
+    margin-top: 10px;
+    color: #bba999;
+}
+
+
+/* =========================================================
+   FLOATING BUTTONS
+========================================================= */
+
+.floating-button {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+    width: 55px;
+    height: 55px;
+    border: none;
+    border-radius: 50%;
+    background: var(--green-dark);
+    color: white;
+    font-size: 22px;
+    box-shadow: var(--shadow);
+    z-index: 100;
+    transition: 0.3s;
+    animation: float 3s ease-in-out infinite;
+}
+
+.floating-button:hover {
+    background: var(--brown);
+    transform: scale(1.1);
+}
+
+.ai-panel,
+.help-panel {
+    display: none;
+    position: fixed;
+    right: 25px;
+    bottom: 90px;
+    width: 320px;
+    max-width: calc(100% - 40px);
+    background: var(--cream);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: var(--shadow);
+    z-index: 99;
+    animation: fadeUp 0.4s ease;
+}
+
+.ai-panel input,
+.help-panel input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 12px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+}
+
+.panel-button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 12px;
+    border: none;
+    border-radius: 10px;
+    background: var(--green-dark);
+    color: white;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 900px) {
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 70px;
+    }
+
+    .hero p {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-visual {
+        width: 320px;
+        height: 320px;
+    }
+
+    .visual-strip {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .explorer-grid,
+    .market-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
+
+@media (max-width: 600px) {
+
+    section {
+        padding: 60px 5%;
+    }
+
+    .navbar {
+        padding: 15px 5%;
+    }
+
+    .nav-links {
+        gap: 12px;
+        font-size: 12px;
+    }
+
+    .hero h1 {
+        font-size: 60px;
+    }
+
+    .visual-strip {
+        grid-template-columns: 1fr;
+        padding: 20px 5% 60px;
+    }
+
+    .category-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .creator {
+        margin: 20px 5%;
+        padding: 40px 25px;
+    }
+
+    .creator h2 {
+        font-size: 35px;
+    }
+
+    .quiz-options {
+        grid-template-columns: 1fr;
+    }
+
+    .quiz-container {
+        padding: 25px;
+    }
+
+}
+
+.art-facts-bar {
+    width: 100%;
+    height: 42px;
+    overflow: hidden;
+    background-color: #6b432c;
+    color: #f4ead8;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.art-fact-track {
+    display: flex;
+    width: max-content;
+    animation: moveFacts 500s linear infinite;
+}
+
+.art-fact {
+    display: inline-block;
+    padding-right: 70px;
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+@keyframes moveFacts {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+
+}
+
+/* =========================================================
+   SCROLL REVEAL
+========================================================= */
+
+.reveal {
+    opacity: 0;
+    transform: translateY(35px);
+    transition: 0.8s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     LOGIN
+===================================================== -->
+
+<section id="authPage">
+
+    <div class="auth-box" id="authBox">
+
+        <div class="auth-logo">sutrā</div>
+
+        <p class="auth-subtitle">
+            Discover the threads that connect us.
+        </p>
+
+
+        <!-- LOGIN -->
+
+        <div id="loginForm">
+
+            <input
+                class="auth-input"
+                id="loginUsername"
+                placeholder="Username"
+            >
+
+            <input
+                class="auth-input"
+                id="loginPassword"
+                type="password"
+                placeholder="Password"
+            >
+
+            <p id="loginError" class="login-error">
+                Incorrect password. Please try again.
+            </p>
+
+            <button
+                class="auth-button"
+                onclick="login()"
+            >
+                Login
+            </button>
+
+            <p class="auth-switch">
+                Don't have an account?
+                <span onclick="showSignup()">Sign up</span>
+            </p>
+
+        </div>
+
+
+        <!-- SIGN UP -->
+
+        <div id="signupForm" style="display:none;">
+
+            <input
+                class="auth-input"
+                id="signupName"
+                placeholder="Your name"
+            >
+
+            <input
+                class="auth-input"
+                id="signupUsername"
+                placeholder="Create username"
+            >
+
+            <input
+                class="auth-input"
+                id="signupPassword"
+                type="password"
+                placeholder="Create password"
+            >
+
+            <input
+                class="auth-input"
+                id="signupConfirm"
+                type="password"
+                placeholder="Confirm password"
+            >
+
+            <button
+                class="auth-button"
+                onclick="signup()"
+            >
+                Create Account
+            </button>
+
+            <p class="auth-switch">
+                Already have an account?
+                <span onclick="showLogin()">Login</span>
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAIN WEBSITE
+===================================================== -->
+
+<main id="mainPage" style="display:none;">
+
+
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+    <div class="logo">sutrā</div>
+
+    <ul class="nav-links">
+
+        <li>
+            <a href="#home">Home</a>
+        </li>
+
+        <li>
+            <a href="#explorer">Explorer</a>
+        </li>
+
+        <li>
+            <a href="#marketplace">Marketplace</a>
+        </li>
+
+        <li>
+            <a href="#creators">Creators</a>
+        </li>
+
+        <li>
+            <a href="#game">Game</a>
+        </li>
+
+    </ul>
+
+</nav>
+
+<div class="art-facts-bar">
+    <div class="art-fact-track" id="artFactTrack"></div>
+</div>
+
+<!-- =====================================================
+     HERO
+===================================================== -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <div class="hero-tag">
+            THREADS OF CULTURE • STORIES OF PEOPLE
+        </div>
+
+        <h1>
+            Discover
+            <span>Sutrā.</span>
+        </h1>
+
+        <p>
+            A living map of art, traditions, people and stories
+            that connect communities across India.
+        </p>
+
+
+        <div class="sutra-search-wrapper">
+
+    <div class="sutra-search-box">
+
+        <span class="search-icon">⌕</span>
+
+        <input
+            type="text"
+            id="cultureSearch"
+            placeholder="Discover a culture, art, place..."
+            autocomplete="off"
+        >
+
+        <button id="searchButton">
+            Discover
+        </button>
+
+    </div>
+
+    
+    <div id="searchSuggestions"></div>
+
+</div>
+ <span class="suggestion">Artist</span>
+                <span class="suggestion">Artwork</span>
+                <span class="suggestion">Craft</span>
+                <span class="suggestion">Tradition</span>
+                <span class="suggestion">Festival</span>
+                <span class="suggestion">Story</span>
+                <span class="suggestion">Region</span>
+                <span class="suggestion">Community</span>
+                <span class="suggestion">Location</span>
+                <span class="suggestion">Art Form</span>
+                <span class="suggestion">Time</span>
+                <span class="suggestion">Genre</span>
+
+<div id="searchResults"></div>
+               
+
+            </div>
+
+
+    <!-- HERO VISUAL -->
+
+    <div class="hero-visual">
+
+        <svg viewBox="0 0 300 300">
+
+            <circle
+                cx="150"
+                cy="150"
+                r="100"
+                fill="none"
+                stroke="#526b4d"
+                stroke-width="3"
+            />
+
+            <path
+                d="M70 160 C110 80 190 220 230 140"
+                fill="none"
+                stroke="#6b4226"
+                stroke-width="8"
+                stroke-linecap="round"
+            />
+
+            <path
+                d="M80 190 C130 100 170 210 220 100"
+                fill="none"
+                stroke="#9a6a45"
+                stroke-width="5"
+                stroke-linecap="round"
+            />
+
+            <circle
+                cx="150"
+                cy="150"
+                r="25"
+                fill="#526b4d"
+            />
+
+            <circle
+                cx="150"
+                cy="150"
+                r="10"
+                fill="#fffaf2"
+            />
+
+        </svg>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     VISUAL ART STRIP
+===================================================== -->
+
+<div class="visual-strip reveal">
+
+
+    <!-- ART 1 -->
+
+    <div class="art-card">
+
+        <svg viewBox="0 0 400 250">
+
+            <rect width="400" height="250" fill="#dbe5d5"/>
+
+            <circle
+                cx="200"
+                cy="120"
+                r="70"
+                fill="none"
+                stroke="#526b4d"
+                stroke-width="5"
+            />
+
+            <circle
+                cx="200"
+                cy="120"
+                r="50"
+                fill="none"
+                stroke="#6b4226"
+                stroke-width="3"
+            />
+
+            <path
+                d="M130 120 Q200 50 270 120 Q200 190 130 120"
+                fill="none"
+                stroke="#6b4226"
+                stroke-width="4"
+            />
+
+            <circle cx="200" cy="120" r="10" fill="#6b4226"/>
+
+        </svg>
+
+        <div class="art-label">
+            Patterns
+        </div>
+
+    </div>
+
+
+    <!-- ART 2 -->
+
+    <div class="art-card">
+
+        <svg viewBox="0 0 400 250">
+
+            <rect width="400" height="250" fill="#eadbc8"/>
+
+            <path
+                d="M120 210 L160 70 L240 70 L280 210 Z"
+                fill="#9a6a45"
+            />
+
+            <path
+                d="M150 70 Q200 20 250 70"
+                fill="none"
+                stroke="#344833"
+                stroke-width="10"
+            />
+
+            <circle
+                cx="200"
+                cy="125"
+                r="25"
+                fill="#dbe5d5"
+            />
+
+            <path
+                d="M170 160 Q200 185 230 160"
+                fill="none"
+                stroke="#344833"
+                stroke-width="6"
+            />
+
+        </svg>
+
+        <div class="art-label">
+            Handmade
+        </div>
+
+    </div>
+
+
+    <!-- ART 3 -->
+
+    <div class="art-card">
+
+        <svg viewBox="0 0 400 250">
+
+            <rect width="400" height="250" fill="#526b4d"/>
+
+            <circle
+                cx="200"
+                cy="80"
+                r="35"
+                fill="#eadbc8"
+            />
+
+            <path
+                d="M170 120 Q200 100 230 120 L260 200 L140 200 Z"
+                fill="#eadbc8"
+            />
+
+            <path
+                d="M145 150 L90 120"
+                stroke="#eadbc8"
+                stroke-width="10"
+            />
+
+            <path
+                d="M255 150 L310 110"
+                stroke="#eadbc8"
+                stroke-width="10"
+            />
+
+        </svg>
+
+        <div class="art-label">
+            Movement
+        </div>
+
+    </div>
+
+
+    <!-- ART 4 -->
+
+    <div class="art-card">
+
+        <svg viewBox="0 0 400 250">
+
+            <rect width="400" height="250" fill="#fffaf2"/>
+
+            <path
+                d="M200 40
+                   C150 80 150 150 200 210
+                   C250 150 250 80 200 40Z"
+                fill="#526b4d"
+            />
+
+            <path
+                d="M200 55 L200 200"
+                stroke="#fffaf2"
+                stroke-width="4"
+            />
+
+            <path
+                d="M200 100 L170 80
+                   M200 125 L230 105
+                   M200 150 L170 135"
+                stroke="#fffaf2"
+                stroke-width="4"
+            />
+
+        </svg>
+
+        <div class="art-label">
+            Nature
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =====================================================
+     EXPLORER
+===================================================== -->
+
+<section id="explorer" class="reveal">
+
+    <h2 class="section-heading">
+        Explore the threads.
+    </h2>
+
+    <p class="section-description">
+        Go beyond what you already know. Discover the people,
+        places and traditions that make culture feel alive.
+    </p>
+
+
+    <div class="explorer-grid">
+
+
+        <div
+            class="explorer-card"
+            onclick="openCategory('Stories')"
+        >
+
+            <div class="explorer-icon">✦</div>
+
+            <h3>
+                Stories of India
+            </h3>
+
+            <p>
+                Discover forgotten stories, local legends,
+                family traditions and memories passed
+                from one generation to another.
+            </p>
+
+        </div>
+
+
+        <div
+            class="explorer-card"
+            onclick="openCategory('Creators')"
+        >
+
+            <div class="explorer-icon">◌</div>
+
+            <h3>
+                Meet the Makers
+            </h3>
+
+            <p>
+                Find independent artists, craftspeople,
+                musicians and creators keeping traditions alive.
+            </p>
+
+        </div>
+
+
+        <div
+            class="explorer-card"
+            onclick="openCategory('Traditions')"
+        >
+
+            <div class="explorer-icon">⌘</div>
+
+            <h3>
+                Traditions Today
+            </h3>
+
+            <p>
+                See how traditional art forms are evolving
+                and finding new meaning in modern life.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     CATEGORIES
+===================================================== -->
+
+<section class="categories reveal">
+
+    <h2 class="section-heading">
+        Choose your thread.
+    </h2>
+
+    <p class="section-description">
+        Start anywhere. Every thread leads somewhere.
+    </p>
+
+
+    <div class="category-grid">
+
+
+        <div
+            class="category"
+            onclick="openCategory('Art')"
+        >
+
+            <div style="font-size:30px;">◈</div>
+
+            <h3>Art</h3>
+
+            <p>Paintings, patterns & visual stories.</p>
+
+        </div>
+
+
+        <div
+            class="category"
+            onclick="openCategory('Craft')"
+        >
+
+            <div style="font-size:30px;">◇</div>
+
+            <h3>Craft</h3>
+
+            <p>Handmade objects & traditional skills.</p>
+
+        </div>
+
+
+        <div
+            class="category"
+            onclick="openCategory('Music')"
+        >
+
+            <div style="font-size:30px;">♫</div>
+
+            <h3>Music</h3>
+
+            <p>Sounds that carry stories.</p>
+
+        </div>
+
+
+        <div
+            class="category"
+            onclick="openCategory('Dance')"
+        >
+
+            <div style="font-size:30px;">◌</div>
+
+            <h3>Dance</h3>
+
+            <p>Movement, rhythm & expression.</p>
+
+        </div>
+
+
+        <div
+            class="category"
+            onclick="openCategory('Food')"
+        >
+
+            <div style="font-size:30px;">✦</div>
+
+            <h3>Food</h3>
+
+            <p>Recipes rooted in memory.</p>
+
+        </div>
+
+
+        <div
+            class="category"
+            onclick="openCategory('Architecture')"
+        >
+
+            <div style="font-size:30px;">⌂</div>
+
+            <h3>Architecture</h3>
+
+            <p>Spaces shaped by culture.</p>
+
+        </div>
+
+
+        <div
+            class="category"
+            onclick="openCategory('Festivals')"
+        >
+
+            <div style="font-size:30px;">✺</div>
+
+            <h3>Festivals</h3>
+
+            <p>Celebrations that bring communities together.</p>
+
+        </div>
+
+
+        <div
+            class="category"
+            onclick="openCategory('Stories')"
+        >
+
+            <div style="font-size:30px;">❝</div>
+
+            <h3>Stories</h3>
+
+            <p>Voices from generations past and present.</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MAP
+===================================================== -->
+
+<section class="map-section reveal">
+
+    <h2 class="section-heading">
+        Culture has a place.
+    </h2>
+
+    <p class="section-description" style="margin-left:auto;margin-right:auto;">
+        Explore India through the traditions rooted in every region.
+        Click the map to begin discovering.
+    </p>
+<div class="map-placeholder">
+
+    <div id="indiaMap">
+
+        <div class="map-loading">
+            Loading India's cultural map...
+        </div>
+
+    </div>
+
+</div>
+
+    
+        <div class="map-text" id="mapInfo">
+            Click the map • Double-click to explore a region
+        </div>
+
+
+</section>
+
+
+<!-- =====================================================
+     CREATOR SPOTLIGHT
+===================================================== -->
+
+<section id="creators" class="creator reveal">
+
+    <div class="creator-content">
+
+        <h2>
+            Meet the people behind the culture.
+        </h2>
+
+        <p>
+            Culture doesn't exist in museums alone.
+            It lives in the hands, voices and imagination
+            of people who continue creating.
+        </p>
+
+        <button
+            class="creator-button"
+            onclick="featureArtist()"
+        >
+            Discover a Creator
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     MARKETPLACE
+===================================================== -->
+
+<section
+    id="marketplace"
+    class="marketplace reveal"
+>
+
+    <h2 class="section-heading">
+        Made by people. Kept by people.
+    </h2>
+
+    <p class="section-description">
+        Discover handmade pieces and support independent creators.
+    </p>
+
+
+    <div class="market-grid">
+
+    <!-- ITEM 1 -->
+    <div class="market-card"
+         onclick="window.location.href='market.html'"
+         style="cursor:pointer;">
+
+        <div class="market-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=800&q=80"
+                alt="Handcrafted pottery"
+                style="width:100%;height:100%;object-fit:cover;"
+            >
+
+        </div>
+
+        <div class="market-info">
+
+            <h3>
+                Blue Pottery
+            </h3>
+
+            <p>
+                Jaipur, Rajasthan · Handmade
+            </p>
+
+            <span class="price">
+                ₹950
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ITEM 2 -->
+    <div class="market-card"
+         onclick="window.location.href='market.html'"
+         style="cursor:pointer;">
+
+        <div class="market-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80"
+                alt="Traditional textile"
+                style="width:100%;height:100%;object-fit:cover;"
+            >
+
+        </div>
+
+        <div class="market-info">
+
+            <h3>
+                Kalamkari Textile
+            </h3>
+
+            <p>
+                Andhra Pradesh · Traditional Art
+            </p>
+
+            <span class="price">
+                ₹3,800
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- ITEM 3 -->
+    <div class="market-card"
+         onclick="window.location.href='market.html'"
+         style="cursor:pointer;">
+
+        <div class="market-image">
+
+            <img
+                src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=800&q=80"
+                alt="Traditional jewellery"
+                style="width:100%;height:100%;object-fit:cover;"
+            >
+
+        </div>
+
+        <div class="market-info">
+
+            <h3>
+                Dhokra Jewellery
+            </h3>
+
+            <p>
+                Chhattisgarh · Lost-Wax Craft
+            </p>
+
+            <span class="price">
+                ₹1,450
+            </span>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div style="text-align:center;margin-top:30px;">
+
+    <button
+        onclick="window.location.href='market.html'"
+        style="
+            background:#3b2418;
+            color:#fffaf2;
+            border:none;
+            padding:13px 25px;
+            border-radius:30px;
+            cursor:pointer;
+            font-family:inherit;
+            font-size:15px;
+        "
+    >
+        Explore Marketplace →
+    </button>
+
+</div>
+</section>
+
+
+<!-- =====================================================
+     CULTURE QUEST
+===================================================== -->
+
+<section
+    class="game reveal"
+    id="game"
+>
+
+    <h2 class="section-heading">
+        Sutrā Culture Quest
+    </h2>
+
+    <p class="section-description" style="margin-left:auto;margin-right:auto;">
+        Test your cultural knowledge.
+        Every correct answer adds 10 points.
+    </p>
+
+
+    <div class="quiz-container">
+
+
+        <div class="quiz-top">
+
+            <span id="questionNumber">
+                Question 1 / 8
+            </span>
+
+            <span id="quizScore">
+                0 points
+            </span>
+
+        </div>
+
+
+        <div class="progress-container">
+
+            <div
+                class="progress-bar"
+                id="progressBar"
+            ></div>
+
+        </div>
+
+
+        <div
+            class="quiz-question"
+            id="question"
+        >
+        </div>
+
+
+        <div
+            class="quiz-options"
+            id="quizOptions"
+        >
+        </div>
+
+
+        <div
+            class="quiz-feedback"
+            id="quizFeedback"
+        >
+        </div>
+
+
+        <div
+            class="score"
+            id="score"
+        >
+            Points: 0
+        </div>
+
+
+        <button
+            class="restart-button"
+            id="restartButton"
+            onclick="restartQuiz()"
+        >
+            Play Again
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="footer-logo">
+        sutrā
+    </div>
+
+    <p>
+        Discover the threads that connect us.
+    </p>
+
+    <p>
+        © 2026 Sutrā
+    </p>
+
+</footer>
+
+
+<!-- =====================================================
+     AI BUTTON
+===================================================== -->
+
+<button
+    class="floating-button"
+    onclick="toggleAI()"
+>
+    ✦
+</button>
+
+
+<div
+    class="ai-panel"
+    id="aiPanel"
+>
+
+    <h3>
+        Sutrā AI
+    </h3>
+
+    <p style="margin-top:8px;color:#806653;">
+        Ask me something about culture.
+    </p>
+
+    <input
+        id="aiQuestion"
+        placeholder="Ask something..."
+    >
+
+    <button
+        class="panel-button"
+        onclick="askAI()"
+    >
+        Ask
+    </button>
+
+    <p
+        id="aiAnswer"
+        style="margin-top:12px;"
+    ></p>
+
+</div>
+
+
+<!-- =====================================================
+     HELP ARTIST
+===================================================== -->
+
+<button
+    class="floating-button"
+    style="right:90px;"
+    onclick="window.location.href='support.html'"
+>
+    ♡
+</button>
+
+
+<div
+    class="help-panel"
+    id="helpPanel"
+>
+
+    <h3>
+        Support a Creator
+    </h3>
+
+    <p style="margin-top:8px;color:#806653;">
+        Every purchase, share and recommendation
+        helps independent creators.
+    </p>
+
+    <button
+        class="panel-button"
+        onclick="supportArtist()"
+    >
+        Support
+    </button>
+
+</div>
+
+
+</main>
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+
+<script>
+
+
+/* =========================================================
+   AUTH
+========================================================= */
+
+function showSignup() {
+
+    document.getElementById("loginForm").style.display = "none";
+
+    document.getElementById("signupForm").style.display = "block";
+
+}
+
+
+function showLogin() {
+
+    document.getElementById("signupForm").style.display = "none";
+
+    document.getElementById("loginForm").style.display = "block";
+
+}
+
+
+function signup() {
+
+    let name =
+        document.getElementById("signupName").value.trim();
+
+    let username =
+        document.getElementById("signupUsername").value.trim();
+
+    let password =
+        document.getElementById("signupPassword").value;
+
+    let confirm =
+        document.getElementById("signupConfirm").value;
+
+
+    if (!name || !username || !password || !confirm) {
+
+        alert("Please fill in all fields.");
+
+        return;
+    }
+
+
+    if (password !== confirm) {
+
+        alert("Passwords do not match.");
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        "sutrāName",
+        name
+    );
+
+    localStorage.setItem(
+        "sutrāUsername",
+        username
+    );
+
+    localStorage.setItem(
+        "sutrāPassword",
+        password
+    );
+
+
+    alert("Account created successfully!");
+
+    showLogin();
+
+}
+
+
+function login() {
+
+    let username =
+        document.getElementById("loginUsername").value.trim();
+
+    let password =
+        document.getElementById("loginPassword").value;
+
+
+    let savedUsername =
+        localStorage.getItem("sutrāUsername");
+
+    let savedPassword =
+        localStorage.getItem("sutrāPassword");
+
+
+    let error =
+        document.getElementById("loginError");
+
+    let authBox =
+        document.getElementById("authBox");
+
+
+    /* Don't show incorrect password message
+       if nothing was entered */
+
+    if (password === "") {
+
+        error.style.display = "none";
+
+        return;
+    }
+
+
+    if (
+        !savedUsername ||
+        !savedPassword ||
+        username !== savedUsername ||
+        password !== savedPassword
+    ) {
+
+        error.style.display = "block";
+
+        authBox.classList.remove("shake");
+
+        void authBox.offsetWidth;
+
+        authBox.classList.add("shake");
+
+        return;
+    }
+
+
+    /* Correct login */
+
+    error.style.display = "none";
+
+    document.getElementById("authPage").style.display = "none";
+
+    document.getElementById("mainPage").style.display = "block";
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+const artFacts = [
+
+    "Madhubani painting comes from the Mithila region of Bihar.",
+    "Warli painting originated among tribal communities in Maharashtra.",
+    "Pattachitra is a traditional painting style from Odisha.",
+    "Kalamkari is a traditional art form associated with Andhra Pradesh and Telangana.",
+    "Gond art originated among the Gond tribal communities of central India.",
+    "Phad painting is traditionally associated with Rajasthan.",
+    "Tanjore painting originated in Tamil Nadu.",
+    "Kangra painting is a famous school of Indian miniature painting.",
+    "Pichwai paintings are traditionally associated with Nathdwara in Rajasthan.",
+    "Cheriyal scroll paintings come from Telangana.",
+    "Rogan art is a traditional textile art from Gujarat.",
+    "Kalamkari literally refers to creating designs with a pen.",
+    "Madhubani paintings traditionally use strong outlines and intricate patterns.",
+    "Warli paintings often use circles, triangles and squares.",
+    "Warli paintings traditionally depict scenes from everyday life.",
+    "Gond paintings often feature animals, plants and nature.",
+    "Pattachitra paintings often depict stories from Hindu mythology.",
+    "Tanjore paintings are known for their rich colors and decorative details.",
+    "Pichwai paintings are traditionally connected with Krishna devotion.",
+    "Phad paintings traditionally tell stories through long painted scrolls.",
+    "India has hundreds of traditional art and craft traditions.",
+    "Rangoli is known by different names across different parts of India.",
+    "Rangoli is called Kolam in Tamil Nadu.",
+    "Rangoli is called Alpana in parts of Bengal.",
+    "Rangoli is called Mandana in parts of Rajasthan and Madhya Pradesh.",
+    "Rangoli designs are often created at entrances to homes.",
+    "Kolam designs are traditionally made using rice flour in South India.",
+    "Some traditional rangoli designs are created freehand without rulers.",
+    "Mehndi is traditionally created using natural henna.",
+    "Mehndi is an important part of many Indian celebrations.",
+    "India has a long tradition of handloom weaving.",
+    "Banarasi silk is traditionally associated with Varanasi.",
+    "Kanchipuram silk sarees are traditionally associated with Tamil Nadu.",
+    "Chanderi fabric comes from Madhya Pradesh.",
+    "Patola weaving is traditionally associated with Gujarat.",
+    "Ikat weaving is practiced in several regions of India.",
+    "Kalamkari is traditionally used to decorate textiles.",
+    "Ajrakh printing is a traditional block-printing technique.",
+    "Ajrakh is strongly associated with the Kutch region of Gujarat.",
+    "Bagru printing is a traditional block-printing technique from Rajasthan.",
+    "Dabu printing is a traditional mud-resist printing technique.",
+    "Bandhani is a traditional tie-dye technique.",
+    "Leheriya is a traditional wave-patterned tie-dye technique from Rajasthan.",
+    "Phulkari embroidery is traditionally associated with Punjab.",
+    "Kantha embroidery is strongly associated with Bengal.",
+    "Chikankari embroidery is traditionally associated with Lucknow.",
+    "Kasuti embroidery is traditionally associated with Karnataka.",
+    "Toda embroidery comes from the Toda community of the Nilgiris.",
+    "Sujni embroidery is a traditional textile craft from Bihar.",
+    "India is famous for its intricate wood-carving traditions.",
+    "Sandalwood carving has a long tradition in Karnataka.",
+    "Kathputli is a traditional string puppet art from Rajasthan.",
+    "Tholu Bommalata is a traditional shadow-puppet theatre from Andhra Pradesh.",
+    "Togalu Gombeyata is a traditional shadow-puppet tradition from Karnataka.",
+    "Puppetry has been practiced in India for centuries.",
+    "Yakshagana is a traditional theatre form from coastal Karnataka.",
+    "Kathakali combines dance, drama, elaborate costumes and makeup.",
+    "Koodiyattam is a traditional Sanskrit theatre tradition from Kerala.",
+    "Chhau combines dance, music and theatrical storytelling.",
+    "Kalaripayattu is a traditional martial art from Kerala.",
+    "Bharatanatyam developed in Tamil Nadu.",
+    "Kathak is one of India's major classical dance traditions.",
+    "Odissi developed in Odisha.",
+    "Kuchipudi originated in Andhra Pradesh.",
+    "Manipuri dance developed in Manipur.",
+    "Mohiniyattam is a classical dance tradition from Kerala.",
+    "Sattriya is a classical dance tradition from Assam.",
+    "Bhangra is strongly associated with Punjab.",
+    "Garba is a traditional dance form associated with Gujarat.",
+    "Ghoomar is traditionally associated with Rajasthan.",
+    "Lavani is a popular traditional performance tradition from Maharashtra.",
+    "Dollu Kunitha is a traditional drum dance from Karnataka.",
+    "Bihu dance is associated with Assam.",
+    "India has a rich tradition of storytelling through performance.",
+    "Folk songs often preserve stories and traditions across generations.",
+    "Many Indian crafts use natural materials available in their local regions.",
+    "Terracotta has been used in Indian art for thousands of years.",
+    "Dhokra is a traditional metal-casting craft using the lost-wax technique.",
+    "Dhokra craft is practiced by communities in several parts of India.",
+    "Blue pottery is strongly associated with Jaipur.",
+    "Bidriware is traditionally associated with Bidar in Karnataka.",
+    "Bidriware is known for its distinctive metal inlay work.",
+    "Aranmula Kannadi is a traditional handmade metal mirror from Kerala.",
+    "Kondapalli toys are traditional wooden toys from Andhra Pradesh.",
+    "Channapatna toys are traditional wooden toys from Karnataka.",
+    "Channapatna is famous for its colorful lacquered wooden toys.",
+    "Etikoppaka toys are traditional lacquered wooden toys from Andhra Pradesh.",
+    "Thanjavur dolls are traditional bobblehead dolls from Tamil Nadu.",
+    "Mysore painting is known for delicate lines and decorative details.",
+    "Mysore painting developed under the patronage of the Wadiyar rulers.",
+    "Kalamkari and block printing are both important Indian textile traditions.",
+    "India's traditional crafts often reflect the geography of their regions.",
+    "Temple architecture is an important part of India's artistic heritage.",
+    "Indian temple sculptures often depict stories from mythology.",
+    "The Ajanta Caves contain some of India's best-known ancient paintings.",
+    "The Ellora Caves contain Buddhist, Hindu and Jain monuments.",
+    "The Konark Sun Temple is famous for its stone-carved chariot design.",
+    "The Khajuraho temples are famous for their intricate stone sculptures.",
+    "Hampi contains numerous examples of historic Indian architecture.",
+    "Indian art often combines storytelling with symbolism.",
+    "Traditional Indian art is frequently passed from one generation to another.",
+    "Many Indian crafts are closely connected with local communities.",
+    "Art can preserve stories that have been passed down for centuries.",
+    "India's cultural traditions vary dramatically from region to region.",
+    "A single Indian art form can have many regional variations.",
+    "Indian crafts often turn everyday materials into works of art.",
+    "From textiles to paintings, Indian art is deeply connected to storytelling."
+
+];
+
+const track = document.getElementById("artFactTrack");
+
+// Shuffle the facts
+const shuffledFacts = [...artFacts].sort(() => Math.random() - 0.5);
+
+// Create the facts twice
+// The second copy makes the movement completely seamless.
+
+const allFacts = [...shuffledFacts, ...shuffledFacts];
+
+allFacts.forEach(function(fact) {
+
+    const factElement = document.createElement("span");
+
+    factElement.className = "art-fact";
+
+    factElement.textContent = fact;
+
+    track.appendChild(factElement);
+
+});
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+/* =========================================================
+   SUTRĀ CULTURAL SEARCH
+========================================================= */
+
+
+/*
+   CULTURAL DATABASE
+*/
+
+const searchCultureData = [
+
+    {
+        state: "Andhra Pradesh",
+
+        art: "Kalamkari",
+
+        dance: "Kuchipudi",
+
+        craft: "Kondapalli Toys",
+
+        food: "Pulihora & Gongura",
+
+        image:
+        "https://images.unsplash.com/photo-1582550945154-66ea8f8b5c64?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Traditional artistic expressions of Andhra Pradesh.",
+
+        description:
+        "Discover the textile traditions, classical performances and colourful crafts rooted in Andhra Pradesh.",
+
+        keywords:
+        "andhra kalamkari kuchipudi kondapalli pulihora gongura"
+
+    },
+
+
+    {
+        state: "Assam",
+
+        art: "Assamese Silk Weaving",
+
+        dance: "Bihu",
+
+        craft: "Muga Silk",
+
+        food: "Masor Tenga & Pitha",
+
+        image:
+        "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Threads, festivals and traditions from Assam.",
+
+        description:
+        "Explore Assam through its silk weaving traditions, vibrant Bihu celebrations and distinctive cuisine.",
+
+        keywords:
+        "assam bihu muga silk pitha masor tenga"
+
+    },
+
+
+    {
+        state: "Bihar",
+
+        art: "Madhubani Painting",
+
+        dance: "Jat-Jatin",
+
+        craft: "Sujuni Embroidery",
+
+        food: "Litti Chokha",
+
+        image:
+        "https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Stories painted through the Madhubani tradition.",
+
+        description:
+        "Madhubani art transforms walls, paper and fabric into colourful visual stories inspired by nature and tradition.",
+
+        keywords:
+        "bihar madhubani mithila painting litti chokha"
+
+    },
+
+
+    {
+        state: "Gujarat",
+
+        art: "Patola Weaving",
+
+        dance: "Garba",
+
+        craft: "Bandhani & Ajrakh",
+
+        food: "Dhokla & Thepla",
+
+        image:
+        "https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Colour, rhythm and intricate textile traditions.",
+
+        description:
+        "Gujarat's cultural landscape is filled with vivid textiles, embroidery, Garba and generations-old craft traditions.",
+
+        keywords:
+        "gujarat garba patola bandhani ajrakh dhokla thepla"
+
+    },
+
+
+    {
+        state: "Karnataka",
+
+        art: "Mysore Painting",
+
+        dance: "Yakshagana & Dollu Kunitha",
+
+        craft: "Mysore Silk & Kasuti",
+
+        food: "Bisi Bele Bath & Mysore Pak",
+
+        image:
+        "https://images.unsplash.com/photo-1600100397608-f0103f1f7e52?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "A meeting of theatre, craft, silk and heritage.",
+
+        description:
+        "From Yakshagana performances to Mysore painting and Kasuti embroidery, Karnataka has a diverse artistic heritage.",
+
+        keywords:
+        "karnataka mysore yakshagana dollu kasuti silk bisi bele bath"
+
+    },
+
+
+    {
+        state: "Kerala",
+
+        art: "Kerala Mural Painting",
+
+        dance: "Kathakali & Mohiniyattam",
+
+        craft: "Coir & Bell Metal",
+
+        food: "Sadya & Appam",
+
+        image:
+        "https://images.unsplash.com/photo-1593693411515-c20261bcad6e?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Colour, expression and stories from Kerala.",
+
+        description:
+        "Kerala's traditions span temple murals, Kathakali, Mohiniyattam, Theyyam, crafts and its celebrated Sadya.",
+
+        keywords:
+        "kerala kathakali mohiniyattam mural sadya appam theyyam"
+
+    },
+
+
+    {
+        state: "Maharashtra",
+
+        art: "Warli Painting",
+
+        dance: "Lavani",
+
+        craft: "Paithani Weaving",
+
+        food: "Puran Poli & Misal Pav",
+
+        image:
+        "https://images.unsplash.com/photo-1547891654-e66ed7ebb968?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Simple lines carrying generations of stories.",
+
+        description:
+        "Warli painting uses simple geometric forms to tell stories of people, nature, celebrations and everyday life.",
+
+        keywords:
+        "maharashtra warli lavani paithani puran poli misal"
+
+    },
+
+
+    {
+        state: "Manipur",
+
+        art: "Manipuri Handicrafts",
+
+        dance: "Manipuri",
+
+        craft: "Traditional Textiles",
+
+        food: "Eromba",
+
+        image:
+        "https://images.unsplash.com/photo-1606293926075-69a00dbfde81?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Graceful movement and distinctive textile traditions.",
+
+        description:
+        "Manipur's cultural identity is expressed through its classical dance, handwoven textiles, music and community traditions.",
+
+        keywords:
+        "manipur manipuri dance eromba textiles handicraft"
+
+    },
+
+
+    {
+        state: "Meghalaya",
+
+        art: "Bamboo & Cane Craft",
+
+        dance: "Wangala",
+
+        craft: "Bamboo Weaving",
+
+        food: "Jadoh",
+
+        image:
+        "https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Forest, craft and community in Meghalaya.",
+
+        description:
+        "Bamboo, cane, harvest celebrations and indigenous traditions form an important part of Meghalaya's cultural landscape.",
+
+        keywords:
+        "meghalaya bamboo cane wangala jadoh"
+
+    },
+
+
+    {
+        state: "Nagaland",
+
+        art: "Tribal Weaving",
+
+        dance: "War Dance",
+
+        craft: "Naga Shawls",
+
+        food: "Smoked Pork & Bamboo Shoot",
+
+        image:
+        "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Textiles and traditions from Naga communities.",
+
+        description:
+        "Nagaland is home to many communities with distinctive textiles, motifs, music, food and celebrations.",
+
+        keywords:
+        "nagaland naga shawls hornbill war dance bamboo shoot"
+
+    },
+
+
+    {
+        state: "Odisha",
+
+        art: "Pattachitra",
+
+        dance: "Odissi",
+
+        craft: "Pipili Appliqué",
+
+        food: "Pakhala Bhata & Chhena Poda",
+
+        image:
+        "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Painted stories and classical movement from Odisha.",
+
+        description:
+        "Odisha's heritage combines Pattachitra painting, Odissi dance, temple traditions and distinctive crafts.",
+
+        keywords:
+        "odisha odissi pattachitra pipili jagannath pakhala"
+
+    },
+
+
+    {
+        state: "Punjab",
+
+        art: "Phulkari",
+
+        dance: "Bhangra & Giddha",
+
+        craft: "Phulkari Embroidery",
+
+        food: "Makki di Roti & Sarson da Saag",
+
+        image:
+        "https://images.unsplash.com/photo-1517244683847-7456b63c5969?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Colourful embroidery, music and celebration.",
+
+        description:
+        "Punjab's cultural traditions are expressed through Phulkari embroidery, energetic dance and community celebrations.",
+
+        keywords:
+        "punjab bhangra giddha phulkari makki sarson"
+
+    },
+
+
+    {
+        state: "Rajasthan",
+
+        art: "Phad Painting",
+
+        dance: "Ghoomar & Kalbelia",
+
+        craft: "Block Printing & Blue Pottery",
+
+        food: "Dal Baati Churma",
+
+        image:
+        "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Desert landscapes transformed into art and colour.",
+
+        description:
+        "Rajasthan's heritage includes Phad painting, puppetry, textiles, pottery and vibrant folk performances.",
+
+        keywords:
+        "rajasthan phad ghoomar kalbelia blue pottery block printing"
+
+    },
+
+
+    {
+        state: "Sikkim",
+
+        art: "Thangka Painting",
+
+        dance: "Himalayan Mask Dances",
+
+        craft: "Traditional Wool Weaving",
+
+        food: "Thukpa & Momos",
+
+        image:
+        "https://images.unsplash.com/photo-1544735716-392fe2489ffa?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Himalayan art, textiles and traditions.",
+
+        description:
+        "Sikkim's cultural landscape reflects Himalayan Buddhist traditions, indigenous communities and mountain life.",
+
+        keywords:
+        "sikkim thangka thukpa momos mask dance wool"
+
+    },
+
+
+    {
+        state: "Tamil Nadu",
+
+        art: "Tanjore Painting",
+
+        dance: "Bharatanatyam",
+
+        craft: "Kanchipuram Silk",
+
+        food: "Pongal & Idli",
+
+        image:
+        "https://images.unsplash.com/photo-1582510003544-4d00b7f74220?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Classical art rooted in temple traditions.",
+
+        description:
+        "Tamil Nadu is known for Bharatanatyam, Tanjore painting, temple architecture, bronze sculpture and Kanchipuram silk.",
+
+        keywords:
+        "tamil nadu bharatanatyam tanjore kanchipuram silk pongal"
+
+    },
+
+
+    {
+        state: "Telangana",
+
+        art: "Cheriyal Painting",
+
+        dance: "Perini Sivatandavam",
+
+        craft: "Pochampally Ikat",
+
+        food: "Hyderabadi Biryani",
+
+        image:
+        "https://images.unsplash.com/photo-1601050690117-94f5f6fa8bd7?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Painted stories and woven patterns from Telangana.",
+
+        description:
+        "Telangana's cultural heritage includes Cheriyal scroll painting, Pochampally Ikat and traditional performances.",
+
+        keywords:
+        "telangana cheriyal perini pochampally ikat biryani bathukamma"
+
+    },
+
+
+    {
+        state: "Uttar Pradesh",
+
+        art: "Chikankari",
+
+        dance: "Kathak",
+
+        craft: "Brassware & Zardozi",
+
+        food: "Awadhi Biryani & Petha",
+
+        image:
+        "https://images.unsplash.com/photo-1524498250077-390f9e378fc0?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Craftsmanship shaped by centuries of history.",
+
+        description:
+        "From Lucknow's Chikankari to Kathak and Banarasi weaving, Uttar Pradesh has a vast and varied cultural heritage.",
+
+        keywords:
+        "uttar pradesh lucknow chikankari kathak zardozi banarasi"
+
+    },
+
+
+    {
+        state: "Uttarakhand",
+
+        art: "Aipan Art",
+
+        dance: "Chholiya",
+
+        craft: "Wool Weaving",
+
+        food: "Aloo Ke Gutke & Bal Mithai",
+
+        image:
+        "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Mountain traditions from Kumaon and Garhwal.",
+
+        description:
+        "Aipan designs, folk dance, wool weaving and mountain cuisine reflect the cultural life of Uttarakhand.",
+
+        keywords:
+        "uttarakhand aipan chholiya wool bal mithai"
+
+    },
+
+
+    {
+        state: "West Bengal",
+
+        art: "Kalighat Painting",
+
+        dance: "Chhau & Gaudiya Nritya",
+
+        craft: "Kantha Embroidery",
+
+        food: "Machher Jhol & Rosogolla",
+
+        image:
+        "https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=900&q=85",
+
+        caption:
+        "Art, literature and living traditions of Bengal.",
+
+        description:
+        "West Bengal's heritage includes Kalighat painting, Kantha embroidery, Baul music, terracotta and Bengali cuisine.",
+
+        keywords:
+        "west bengal kalighat kantha chhau baul rosogolla"
+
+    }
+
+];
+
+
+/* =========================================================
+   SEARCH ELEMENTS
+========================================================= */
+
+const cultureSearch =
+    document.getElementById("cultureSearch");
+
+const searchButton =
+    document.getElementById("searchButton");
+
+const searchSuggestions =
+    document.getElementById("searchSuggestions");
+
+const searchResults =
+    document.getElementById("searchResults");
+
+
+/* =========================================================
+   NORMALISE
+========================================================= */
+
+function normaliseSearch(text) {
+
+    return text
+        .toLowerCase()
+        .trim()
+        .replace(/[^\w\s]/g, "");
+
+}
+
+
+/* =========================================================
+   FIND MATCHES
+========================================================= */
+
+function findCultureResults(query) {
+
+    const searchTerm =
+        normaliseSearch(query);
+
+    if (!searchTerm) {
+        return [];
+    }
+
+
+    return searchCultureData
+
+        .map(function(item) {
+
+            const searchableText = (
+
+                item.state + " " +
+                item.art + " " +
+                item.dance + " " +
+                item.craft + " " +
+                item.food + " " +
+                item.keywords
+
+            ).toLowerCase();
+
+
+            let score = 0;
+
+
+            if (
+                item.state
+                    .toLowerCase()
+                    .includes(searchTerm)
+            ) {
+
+                score += 10;
+
+            }
+
+
+            if (
+                item.art
+                    .toLowerCase()
+                    .includes(searchTerm)
+            ) {
+
+                score += 8;
+
+            }
+
+
+            if (
+                item.dance
+                    .toLowerCase()
+                    .includes(searchTerm)
+            ) {
+
+                score += 7;
+
+            }
+
+
+            if (
+                item.craft
+                    .toLowerCase()
+                    .includes(searchTerm)
+            ) {
+
+                score += 6;
+
+            }
+
+
+            if (
+                item.food
+                    .toLowerCase()
+                    .includes(searchTerm)
+            ) {
+
+                score += 5;
+
+            }
+
+
+            if (
+                searchableText
+                    .includes(searchTerm)
+            ) {
+
+                score += 3;
+
+            }
+
+
+            return {
+
+                item: item,
+
+                score: score
+
+            };
+
+        })
+
+
+        .filter(function(result) {
+
+            return result.score > 0;
+
+        })
+
+
+        .sort(function(a, b) {
+
+            return b.score - a.score;
+
+        })
+
+
+        .map(function(result) {
+
+            return result.item;
+
+        });
+
+}
+
+
+/* =========================================================
+   SUGGESTIONS
+========================================================= */
+
+function showSearchSuggestions(query) {
+
+    const searchTerm =
+        normaliseSearch(query);
+
+
+    if (!searchTerm) {
+
+        searchSuggestions.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    const matches =
+        findCultureResults(searchTerm)
+            .slice(0, 5);
+
+
+    if (!matches.length) {
+
+        searchSuggestions.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    searchSuggestions.innerHTML =
+
+        matches.map(function(item) {
+
+            return `
+
+                <div
+                    class="search-suggestion"
+                    data-state="${item.state}"
+                >
+
+                    <strong>
+                        ${item.state}
+                    </strong>
+
+                    <span>
+                        ${item.art} · ${item.dance}
+                    </span>
+
+                </div>
+
+            `;
+
+        }).join("");
+
+
+    searchSuggestions.style.display =
+        "block";
+
+
+    document
+        .querySelectorAll(".search-suggestion")
+        .forEach(function(suggestion) {
+
+            suggestion.addEventListener(
+                "click",
+                function() {
+
+                    cultureSearch.value =
+                        this.dataset.state;
+
+                    searchSuggestions.style.display =
+                        "none";
+
+                    performCultureSearch();
+
+                }
+            );
+
+        });
+
+}
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+function performCultureSearch() {
+
+    const query =
+        cultureSearch.value.trim();
+
+
+    if (!query) {
+
+        searchResults.style.display =
+            "none";
+
+        return;
+
+    }
+
+
+    const results =
+        findCultureResults(query);
+
+
+    searchSuggestions.style.display =
+        "none";
+
+
+    if (!results.length) {
+
+        searchResults.innerHTML = `
+
+            <div class="no-search-results">
+
+                <h3>
+                    No cultural story found
+                </h3>
+
+                <p>
+                    We couldn't find a match for
+                    "<strong>${query}</strong>".
+                </p>
+
+                <p>
+                    Try an art form, dance, craft,
+                    food or Indian state.
+                </p>
+
+            </div>
+
+        `;
+
+
+        searchResults.style.display =
+            "block";
+
+
+        return;
+
+    }
+
+
+    searchResults.innerHTML = `
+
+        <div class="search-results-heading">
+
+            <h3>
+                Stories from the thread
+            </h3>
+
+            <span>
+                ${results.length}
+                cultural result${results.length > 1 ? "s" : ""}
+            </span>
+
+        </div>
+
+
+        <div class="search-result-grid">
+
+            ${results
+                .slice(0, 6)
+                .map(function(item, index) {
+
+                    return `
+
+                        <article
+                            class="culture-pin"
+                            style="animation-delay:${index * 0.08}s"
+                        >
+
+
+                            <!-- IMAGE -->
+
+                            <div class="culture-pin-image">
+
+                                <img
+                                    src="${item.image}"
+                                    alt="${item.art} from ${item.state}"
+                                    loading="lazy"
+                                    onerror="this.style.display='none'"
+                                >
+
+
+                                <div class="image-caption">
+
+                                    <strong>
+                                        ${item.art}
+                                    </strong>
+
+                                    ${item.caption}
+
+                                </div>
+
+                            </div>
+
+
+                            <!-- CONTENT -->
+
+                            <div class="culture-pin-content">
+
+
+                                <span class="culture-pin-state">
+
+                                    ${item.state}
+
+                                </span>
+
+
+                                <h3 class="culture-pin-title">
+
+                                    ${item.art}
+
+                                </h3>
+
+
+                                <p class="culture-pin-description">
+
+                                    ${item.description}
+
+                                </p>
+
+
+                                <!-- TAGS -->
+
+                                <div class="culture-tags">
+
+                                    <span class="culture-tag">
+                                        ${item.art}
+                                    </span>
+
+                                    <span class="culture-tag">
+                                        ${item.dance}
+                                    </span>
+
+                                </div>
+
+
+                                <!-- DETAILS -->
+
+                                <div class="culture-details">
+
+
+                                    <div class="culture-detail">
+
+                                        <span class="culture-detail-label">
+                                            Dance
+                                        </span>
+
+                                        <span class="culture-detail-value">
+                                            ${item.dance}
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="culture-detail">
+
+                                        <span class="culture-detail-label">
+                                            Craft
+                                        </span>
+
+                                        <span class="culture-detail-value">
+                                            ${item.craft}
+                                        </span>
+
+                                    </div>
+
+
+                                    <div class="culture-detail">
+
+                                        <span class="culture-detail-label">
+                                            Food
+                                        </span>
+
+                                        <span class="culture-detail-value">
+                                            ${item.food}
+                                        </span>
+
+                                    </div>
+
+
+                                </div>
+
+
+                                <button
+                                    class="culture-explore"
+                                    onclick="exploreCulture('${item.state}')"
+                                >
+
+                                    Explore ${item.state}
+
+                                </button>
+
+
+                            </div>
+
+                        </article>
+
+                    `;
+
+                })
+                .join("")}
+
+        </div>
+
+    `;
+
+
+    searchResults.style.display =
+        "block";
+
+
+    searchResults.scrollIntoView({
+
+        behavior: "smooth",
+
+        block: "center"
+
+    });
+
+}
+
+
+/* =========================================================
+   EXPLORE BUTTON
+========================================================= */
+
+function exploreCulture(stateName) {
+
+    const mapSection =
+        document.querySelector(".map-section");
+
+
+    if (mapSection) {
+
+        mapSection.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "center"
+
+        });
+
+
+        setTimeout(function() {
+
+            const mapInfo =
+                document.getElementById("mapInfo");
+
+
+            if (mapInfo) {
+
+                mapInfo.innerHTML = `
+
+                    <div class="state-card">
+
+                        <h3>
+                            ${stateName}
+                        </h3>
+
+                        <p>
+                            Continue exploring the cultural
+                            traditions, artists and stories
+                            of ${stateName}.
+                        </p>
+
+                    </div>
+
+                `;
+
+            }
+
+        }, 700);
+
+    }
+
+}
+
+
+/* =========================================================
+   LIVE SUGGESTIONS
+========================================================= */
+
+cultureSearch.addEventListener(
+
+    "input",
+
+    function() {
+
+        showSearchSuggestions(
+            this.value
+        );
+
+    }
+
+);
+
+
+/* =========================================================
+   SEARCH BUTTON
+========================================================= */
+
+searchButton.addEventListener(
+
+    "click",
+
+    function() {
+
+        performCultureSearch();
+
+    }
+
+);
+
+
+/* =========================================================
+   ENTER KEY
+========================================================= */
+
+cultureSearch.addEventListener(
+
+    "keydown",
+
+    function(event) {
+
+        if (event.key === "Enter") {
+
+            event.preventDefault();
+
+            performCultureSearch();
+
+        }
+
+    }
+
+);
+
+
+/* =========================================================
+   CLOSE SUGGESTIONS
+========================================================= */
+
+document.addEventListener(
+
+    "click",
+
+    function(event) {
+
+        if (
+            !event.target.closest(
+                ".sutra-search-wrapper"
+            )
+        ) {
+
+            searchSuggestions.style.display =
+                "none";
+
+        }
+
+    }
+
+);
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+function openCategory(category) {
+
+    alert(
+        "Opening " +
+        category +
+        " discoveries on Sutrā."
+    );
+
+}
+
+
+function mapClick() {
+
+    alert(
+        "You found the cultural map! Try double-clicking for regional discovery."
+    );
+
+}
+
+
+function stateDiscovery() {
+
+    alert(
+        "Regional discovery coming soon — imagine exploring every state through its art, food, stories and creators."
+    );
+
+}
+
+
+function featureArtist() {
+
+    alert(
+        "Creator Spotlight: Discover the person behind the craft, not just the finished artwork."
+    );
+
+}
+
+
+/* =========================================================
+   AI
+========================================================= */
+
+function toggleAI() {
+
+    let panel =
+        document.getElementById("aiPanel");
+
+    panel.style.display =
+        panel.style.display === "block"
+        ? "none"
+        : "block";
+
+}
+
+
+function askAI() {
+
+    let question =
+        document.getElementById("aiQuestion").value.trim();
+
+    let answer =
+        document.getElementById("aiAnswer");
+
+
+    if (!question) {
+
+        answer.innerText =
+            "Ask me anything about culture!";
+
+        return;
+    }
+
+
+    answer.innerText =
+        "That's a fascinating thread to explore. Sutrā would connect your question with artists, traditions, stories and communities.";
+
+}
+
+
+/* =========================================================
+   SUPPORT
+========================================================= */
+
+function toggleHelp() {
+
+    let panel =
+        document.getElementById("helpPanel");
+
+    panel.style.display =
+        panel.style.display === "block"
+        ? "none"
+        : "block";
+
+}
+
+
+function supportArtist() {
+
+    alert(
+        "Thank you! Supporting creators keeps cultural threads alive."
+    );
+
+}
+/* ======================================================
+   INTERACTIVE INDIA MAP
+======================================================= */
+
+let selectedState = null;
+
+
+/*
+   CULTURAL INFORMATION FOR STATES
+*/
+
+const stateCulture = {
+
+    "Andhra Pradesh": {
+        art: "Kalamkari",
+        dance: "Kuchipudi",
+        craft: "Kondapalli Toys",
+        food: "Pulihora & Gongura",
+        description:
+            "Andhra Pradesh is known for its temple traditions, classical Kuchipudi dance, Kalamkari textile art and colourful wooden Kondapalli toys. Its cuisine is known for bold flavours using chilli, tamarind and regional spices."
+    },
+
+    "Arunachal Pradesh": {
+        art: "Traditional tribal weaving",
+        dance: "Bardo Chham",
+        craft: "Handwoven tribal textiles",
+        food: "Thukpa & Momos",
+        description:
+            "Arunachal Pradesh is home to many indigenous communities, each with distinctive textiles, festivals and traditions. Its mountainous landscape is reflected in its food, crafts, music and community celebrations."
+    },
+
+    "Assam": {
+        art: "Assamese silk weaving",
+        dance: "Bihu",
+        craft: "Muga Silk",
+        food: "Masor Tenga & Pitha",
+        description:
+            "Assam's culture is closely connected with the Brahmaputra, tea-growing landscapes and its many communities. Bihu celebrations, Muga silk, Sattriya traditions and Assamese music form important parts of its cultural identity."
+    },
+
+    "Bihar": {
+        art: "Madhubani Painting",
+        dance: "Jat-Jatin & Bidesia",
+        craft: "Sujuni Embroidery",
+        food: "Litti Chokha",
+        description:
+            "Bihar has a long artistic and literary heritage. Madhubani painting is one of its best-known traditions, while folk theatre, embroidery, Chhath celebrations and dishes such as litti chokha reflect the state's cultural life."
+    },
+
+    "Chhattisgarh": {
+        art: "Gond & Tribal Art",
+        dance: "Panthi",
+        craft: "Bastar Metal Craft",
+        food: "Faraa & Chila",
+        description:
+            "Chhattisgarh has a strong tribal cultural heritage expressed through metalwork, painting, music and dance. Bastar is particularly known for its distinctive bell-metal craft and vibrant community traditions."
+    },
+
+    "Goa": {
+        art: "Goan Folk Art",
+        dance: "Fugdi",
+        craft: "Coconut & Bamboo Crafts",
+        food: "Goan Fish Curry & Bebinca",
+        description:
+            "Goa's culture reflects its coastal landscape and a long history of cultural exchange. Folk performances, music, Shigmo celebrations, Portuguese-influenced architecture and distinctive coastal cuisine shape its cultural character."
+    },
+
+    "Gujarat": {
+        art: "Patola Weaving",
+        dance: "Garba",
+        craft: "Bandhani & Ajrakh",
+        food: "Dhokla & Thepla",
+        description:
+            "Gujarat is known for colourful textiles, embroidery and craft traditions. Garba and Dandiya are closely associated with Navratri, while Patola weaving and Bandhani showcase the state's intricate textile heritage."
+    },
+
+    "Haryana": {
+        art: "Phulkari & Folk Crafts",
+        dance: "Dhamal",
+        craft: "Handloom Textiles",
+        food: "Bajra Khichdi & Churma",
+        description:
+            "Haryana's cultural traditions are strongly connected with village life, agriculture and seasonal celebrations. Folk music, storytelling, dance and traditional foods form an important part of community life."
+    },
+
+    "Himachal Pradesh": {
+        art: "Kangra Painting",
+        dance: "Nati",
+        craft: "Chamba Rumal",
+        food: "Dham",
+        description:
+            "Himachal Pradesh has a rich Himalayan heritage. Kangra painting, Chamba embroidery, woollen weaving and Nati dance are among its distinctive traditions, shaped by mountain communities and local landscapes."
+    },
+
+    "Jharkhand": {
+        art: "Sohrai & Khovar Painting",
+        dance: "Chhau",
+        craft: "Tribal Metalwork",
+        food: "Dhuska",
+        description:
+            "Jharkhand has a strong tribal artistic heritage. Sohrai and Khovar paintings use natural pigments and traditional motifs, while folk dances, forest-based crafts and seasonal festivals remain important cultural expressions."
+    },
+
+    "Karnataka": {
+        art: "Mysore Painting",
+        dance: "Yakshagana & Dollu Kunitha",
+        craft: "Mysore Silk & Kasuti",
+        food: "Bisi Bele Bath & Mysore Pak",
+        description:
+            "Karnataka brings together coastal, Deccan and royal traditions. Yakshagana combines theatre, dance, music and elaborate costumes, while Mysore painting, silk, Kasuti embroidery and Hampi's heritage reflect the state's artistic history."
+    },
+
+    "Kerala": {
+        art: "Mural Painting",
+        dance: "Kathakali & Mohiniyattam",
+        craft: "Coir & Bell Metal",
+        food: "Sadya & Appam",
+        description:
+            "Kerala's culture is shaped by its coastline, waterways and long artistic traditions. Kathakali, Mohiniyattam, temple murals, Theyyam and the elaborate Sadya are among its best-known cultural expressions."
+    },
+
+    "Madhya Pradesh": {
+        art: "Gond Painting",
+        dance: "Matki & Rai",
+        craft: "Chanderi & Maheshwari Weaving",
+        food: "Poha & Bhutte Ka Kees",
+        description:
+            "Madhya Pradesh is home to diverse tribal and classical traditions. Gond painting uses intricate patterns inspired by nature, while Chanderi and Maheshwari textiles represent the state's long weaving heritage."
+    },
+
+    "Maharashtra": {
+        art: "Warli Painting",
+        dance: "Lavani",
+        craft: "Paithani Weaving",
+        food: "Puran Poli & Misal Pav",
+        description:
+            "Maharashtra's culture ranges from tribal Warli painting to the energetic Lavani performance tradition. Paithani textiles, Powada storytelling and diverse regional cuisines add to its cultural richness."
+    },
+
+    "Manipur": {
+        art: "Manipuri Handicrafts",
+        dance: "Manipuri",
+        craft: "Shaphee Lanphee Textiles",
+        food: "Eromba",
+        description:
+            "Manipur has a distinctive performing-arts heritage, especially Manipuri dance. Its culture also includes traditional weaving, indigenous sports, music and community festivals rooted in the state's diverse ethnic traditions."
+    },
+
+    "Meghalaya": {
+        art: "Bamboo & Cane Craft",
+        dance: "Wangala",
+        craft: "Bamboo Weaving",
+        food: "Jadoh",
+        description:
+            "Meghalaya's cultural traditions are closely connected to its forests, hills and indigenous communities. Bamboo and cane crafts, harvest celebrations, traditional music and dances form important parts of its cultural landscape."
+    },
+
+    "Mizoram": {
+        art: "Traditional Mizo Weaving",
+        dance: "Cheraw",
+        craft: "Puan Weaving",
+        food: "Bai",
+        description:
+            "Mizoram is known for colourful handwoven textiles and community-based traditions. Cheraw, often called the bamboo dance, is one of its most recognisable cultural performances."
+    },
+
+    "Nagaland": {
+        art: "Tribal Weaving",
+        dance: "War Dance",
+        craft: "Naga Shawls",
+        food: "Smoked Pork & Bamboo Shoot",
+        description:
+            "Nagaland contains many distinct Naga communities, each with its own traditions, textiles and visual motifs. The Hornbill Festival brings many of these cultural expressions together through music, crafts, food and performance."
+    },
+
+    "Odisha": {
+        art: "Pattachitra",
+        dance: "Odissi",
+        craft: "Pipili Appliqué",
+        food: "Pakhala Bhata & Chhena Poda",
+        description:
+            "Odisha has a rich temple and performing-arts heritage. Pattachitra painting, Odissi dance, appliqué work from Pipili and traditions associated with Jagannath culture are important parts of its artistic identity."
+    },
+
+    "Punjab": {
+        art: "Phulkari",
+        dance: "Bhangra & Giddha",
+        craft: "Phulkari Embroidery",
+        food: "Makki di Roti & Sarson da Saag",
+        description:
+            "Punjab's cultural identity is strongly expressed through energetic music and dance, colourful Phulkari embroidery and agricultural traditions. Bhangra and Giddha are especially associated with celebrations and community gatherings."
+    },
+
+    "Rajasthan": {
+        art: "Phad Painting",
+        dance: "Ghoomar & Kalbelia",
+        craft: "Block Printing & Blue Pottery",
+        food: "Dal Baati Churma",
+        description:
+            "Rajasthan's desert landscape has inspired colourful textiles, paintings, puppetry and crafts. Ghoomar, Kalbelia, Phad painting, blue pottery and block printing are among its widely recognised traditions."
+    },
+
+    "Sikkim": {
+        art: "Thangka Painting",
+        dance: "Mask Dances",
+        craft: "Traditional Wool Weaving",
+        food: "Thukpa & Momos",
+        description:
+            "Sikkim's culture reflects Himalayan Buddhist and indigenous traditions. Thangka painting, monasteries, masked dances, handwoven textiles and mountain cuisine are important elements of its cultural landscape."
+    },
+
+    "Tamil Nadu": {
+        art: "Tanjore Painting",
+        dance: "Bharatanatyam",
+        craft: "Kanchipuram Silk",
+        food: "Pongal & Idli",
+        description:
+            "Tamil Nadu has one of India's richest classical and temple-based artistic traditions. Bharatanatyam, Tanjore painting, bronze sculpture, temple architecture and Kanchipuram silk are major cultural expressions."
+    },
+
+    "Telangana": {
+        art: "Cheriyal Painting",
+        dance: "Perini Sivatandavam",
+        craft: "Pochampally Ikat",
+        food: "Hyderabadi Biryani",
+        description:
+            "Telangana combines Deccan, Telugu and local folk traditions. Cheriyal scroll painting, Pochampally Ikat, Perini dance and Bathukamma celebrations are distinctive elements of its cultural identity."
+    },
+
+    "Tripura": {
+        art: "Bamboo & Cane Craft",
+        dance: "Hojagiri",
+        craft: "Handwoven Tribal Textiles",
+        food: "Mui Borok",
+        description:
+            "Tripura's culture combines Bengali and indigenous tribal traditions. Hojagiri is a distinctive dance tradition, while bamboo crafts, handwoven textiles and the cuisine of its tribal communities reflect the state's diversity."
+    },
+
+    "Uttar Pradesh": {
+        art: "Chikankari",
+        dance: "Kathak",
+        craft: "Brassware & Zardozi",
+        food: "Awadhi Biryani & Petha",
+        description:
+            "Uttar Pradesh has a vast cultural heritage spanning classical dance, Mughal-era crafts, religious traditions and historic cities. Kathak, Lucknow's Chikankari and Zardozi, Banarasi weaving and Awadhi cuisine are notable examples."
+    },
+
+    "Uttarakhand": {
+        art: "Aipan Art",
+        dance: "Chholiya",
+        craft: "Wool Weaving",
+        food: "Aloo Ke Gutke & Bal Mithai",
+        description:
+            "Uttarakhand's Himalayan culture includes distinctive folk art, music and community traditions. Aipan designs, Chholiya dance, wool weaving and mountain foods reflect the lifestyles of Kumaon and Garhwal."
+    },
+
+    "West Bengal": {
+        art: "Kalighat Painting",
+        dance: "Chhau & Gaudiya Nritya",
+        craft: "Kantha Embroidery",
+        food: "Machher Jhol & Rosogolla",
+        description:
+            "West Bengal has a rich literary, musical and visual-arts heritage. Kalighat painting, Kantha embroidery, terracotta traditions, Baul music and Bengali cuisine form important parts of its cultural identity."
+    }
+
+};
+
+
+/*
+   LOAD INDIA GEOJSON
+*/
+
+function loadIndiaMap() {
+
+    const container =
+        document.getElementById("indiaMap");
+
+    if (!container) return;
+
+    if (typeof d3 === "undefined") {
+
+        container.innerHTML =
+            "<div class='map-loading'>Map library could not load.</div>";
+
+        return;
+
+    }
+
+
+    /*
+       GeoJSON containing India's states
+    */
+
+    const geoJSONURL =
+        "https://raw.githubusercontent.com/udit-001/india-maps-data/main/geojson/india.geojson";
+
+
+    d3.json(geoJSONURL)
+
+        .then(function(data) {
+
+            container.innerHTML = "";
+
+
+            const width = 800;
+            const height = 650;
+
+
+            /*
+               CREATE SVG
+            */
+
+            const svg =
+                d3.select("#indiaMap")
+                .append("svg")
+                .attr(
+                    "viewBox",
+                    `0 0 ${width} ${height}`
+                )
+                .attr(
+                    "preserveAspectRatio",
+                    "xMidYMid meet"
+                );
+
+
+            /*
+               MAP PROJECTION
+            */
+
+            const projection =
+                d3.geoMercator()
+                .fitSize(
+                    [width - 40, height - 40],
+                    data
+                );
+
+
+            /*
+               DRAWING PATH
+            */
+
+            const path =
+                d3.geoPath()
+                .projection(projection);
+
+
+            /*
+               MAP GROUP
+            */
+
+            const mapGroup =
+                svg.append("g");
+
+
+            /*
+               TOOLTIP
+            */
+
+            const tooltip =
+                d3.select("body")
+                .append("div")
+                .attr(
+                    "class",
+                    "map-tooltip"
+                );
+
+
+            /*
+               DRAW EVERY STATE
+            */
+
+            mapGroup
+                .selectAll(".state")
+                .data(data.features)
+                .enter()
+                .append("path")
+                .attr(
+                    "class",
+                    "state"
+                )
+                .attr(
+                    "d",
+                    path
+                )
+
+
+                /*
+                   HOVER
+                */
+
+                .on(
+                    "mouseenter",
+                    function(event, d) {
+
+                        const stateName =
+                            getStateName(d);
+
+                        tooltip
+                            .text(stateName)
+                            .style(
+                                "opacity",
+                                1
+                            );
+
+                    }
+                )
+
+
+                .on(
+                    "mousemove",
+                    function(event) {
+
+                        tooltip
+                            .style(
+                                "left",
+                                (event.clientX + 15) + "px"
+                            )
+                            .style(
+                                "top",
+                                (event.clientY + 15) + "px"
+                            );
+
+                    }
+                )
+
+
+                .on(
+                    "mouseleave",
+                    function() {
+
+                        tooltip
+                            .style(
+                                "opacity",
+                                0
+                            );
+
+                    }
+                )
+
+
+                /*
+                   CLICK
+                */
+
+                .on(
+                    "click",
+                    function(event, d) {
+
+                        /*
+                           Remove previous selection
+                        */
+
+                        d3.selectAll(
+                            "#indiaMap .state"
+                        )
+                        .classed(
+                            "selected",
+                            false
+                        );
+
+
+                        /*
+                           Select clicked state
+                        */
+
+                        d3.select(this)
+                        .classed(
+                            "selected",
+                            true
+                        );
+
+
+                        const stateName =
+                            getStateName(d);
+
+
+                        selectedState =
+                            stateName;
+
+
+                        /*
+                           Update information underneath map
+                        */
+
+                        showStateCulture(
+                            stateName
+                        );
+
+                    }
+                );
+
+        })
+
+
+        /*
+           ERROR
+        */
+
+        .catch(function(error) {
+
+            console.error(
+                "India map error:",
+                error
+            );
+
+            container.innerHTML = `
+                <div class="map-loading">
+                    Unable to load the map.<br>
+                    Please check your internet connection.
+                </div>
+            `;
+
+        });
+
+}
+
+
+/*
+   GET STATE NAME
+*/
+
+function getStateName(d) {
+
+    const properties =
+        d.properties || {};
+
+
+    return (
+        properties.name ||
+        properties.NAME_1 ||
+        properties.st_nm ||
+        properties.ST_NM ||
+        properties.shapeName ||
+        properties.NAME ||
+        "Indian State"
+    );
+
+}
+
+
+/*
+   SHOW CULTURAL INFORMATION
+*/
+
+   function showStateCulture(stateName) {
+
+    const mapInfo =
+        document.getElementById("mapInfo");
+
+    const culture =
+        stateCulture[stateName];
+
+    if (!culture) {
+
+        mapInfo.innerHTML = `
+            <div class="state-card">
+
+                <h3>${stateName}</h3>
+
+                <p>
+                    Explore the cultural traditions,
+                    artists and stories of ${stateName}.
+                </p>
+
+            </div>
+        `;
+
+        return;
+    }
+
+    mapInfo.innerHTML = `
+
+        <div class="state-card">
+
+            <h3>${stateName}</h3>
+
+            <div class="culture-grid">
+
+                <div class="culture-item">
+                    <span>Art</span>
+                    <strong>${culture.art}</strong>
+                </div>
+
+                <div class="culture-item">
+                    <span>Dance & Music</span>
+                    <strong>${culture.dance}</strong>
+                </div>
+
+                <div class="culture-item">
+                    <span>Traditional Craft</span>
+                    <strong>${culture.craft}</strong>
+                </div>
+
+                <div class="culture-item">
+                    <span>Food</span>
+                    <strong>${culture.food}</strong>
+                </div>
+
+            </div>
+
+            <p class="culture-description">
+                ${culture.description}
+            </p>
+
+        </div>
+    `;
+}
+
+
+/*
+   DOUBLE CLICK
+*/
+
+function stateDiscovery() {
+
+    if (!selectedState) {
+
+        document.getElementById(
+            "mapInfo"
+        ).innerText =
+            "Select a state first to discover its culture.";
+
+        return;
+
+    }
+
+
+    const culture =
+        stateCulture[selectedState];
+
+
+    if (culture) {
+
+        alert(
+            selectedState +
+            "\n\n" +
+            "Featured tradition: " +
+            culture.art +
+            "\n\n" +
+            culture.description
+        );
+
+    }
+
+    else {
+
+        alert(
+            "Discovering artists, artworks and cultural stories from " +
+            selectedState +
+            "..."
+        );
+
+    }
+
+}
+
+
+/*
+   START MAP
+*/
+
+loadIndiaMap();
+
+/* =========================================================
+   CULTURE QUEST
+========================================================= */
+
+const questions = [
+
+    {
+        question:
+            "Which Indian festival is widely known as the festival of lights?",
+
+        options: [
+            "Diwali",
+            "Holi",
+            "Onam",
+            "Bihu"
+        ],
+
+        answer:
+            "Diwali"
+    },
+
+
+    {
+        question:
+            "Madhubani art is traditionally associated with which region?",
+
+        options: [
+            "Mithila",
+            "Konkan",
+            "Kashmir",
+            "Malwa"
+        ],
+
+        answer:
+            "Mithila"
+    },
+
+
+    {
+        question:
+            "Warli art is traditionally associated with which state?",
+
+        options: [
+            "Maharashtra",
+            "Kerala",
+            "Punjab",
+            "Assam"
+        ],
+
+        answer:
+            "Maharashtra"
+    },
+
+
+    {
+        question:
+            "Pattachitra is strongly associated with which state?",
+
+        options: [
+            "Odisha",
+            "Goa",
+            "Himachal Pradesh",
+            "Telangana"
+        ],
+
+        answer:
+            "Odisha"
+    },
+
+
+    {
+        question:
+            "Which material is commonly used in traditional pottery?",
+
+        options: [
+            "Clay",
+            "Glass",
+            "Steel",
+            "Rubber"
+        ],
+
+        answer:
+            "Clay"
+    },
+
+
+    {
+        question:
+            "Which classical dance form is associated with Kerala?",
+
+        options: [
+            "Kathakali",
+            "Garba",
+            "Bhangra",
+            "Ghoomar"
+        ],
+
+        answer:
+            "Kathakali"
+    },
+
+
+    {
+        question:
+            "Which instrument is commonly associated with Indian classical music?",
+
+        options: [
+            "Sitar",
+            "Trumpet",
+            "Saxophone",
+            "Drum kit"
+        ],
+
+        answer:
+            "Sitar"
+    },
+
+
+    {
+        question:
+            "What is one important role of traditional art in a community?",
+
+        options: [
+            "Passing stories and identity",
+            "Removing history",
+            "Replacing all modern art",
+            "Stopping creativity"
+        ],
+
+        answer:
+            "Passing stories and identity"
+    }
+
+];
+
+
+let currentQuestion = 0;
+
+let points = 0;
+
+let quizLocked = false;
+
+
+/* =========================================================
+   LOAD QUESTION
+========================================================= */
+
+function loadQuestion() {
+
+    quizLocked = false;
+
+
+    let q =
+        questions[currentQuestion];
+
+
+    document.getElementById("question").innerText =
+        q.question;
+
+
+    document.getElementById("questionNumber").innerText =
+        "Question " +
+        (currentQuestion + 1) +
+        " / " +
+        questions.length;
+
+
+    document.getElementById("quizScore").innerText =
+        points +
+        " points";
+
+
+    document.getElementById("score").innerText =
+        "Points: " +
+        points;
+
+
+    document.getElementById("quizFeedback").innerText =
+        "";
+
+
+    let progress =
+        ((currentQuestion) /
+        questions.length) *
+        100;
+
+
+    document.getElementById("progressBar").style.width =
+        progress +
+        "%";
+
+
+    let options =
+        document.getElementById("quizOptions");
+
+
+    options.innerHTML = "";
+
+
+    q.options.forEach(function(option) {
+
+        let button =
+            document.createElement("button");
+
+
+        button.className =
+            "quiz-option";
+
+
+        button.innerText =
+            option;
+
+
+        button.onclick =
+            function() {
+
+                answer(option, button);
+
+            };
+
+
+        options.appendChild(button);
+
+    });
+
+}
+
+
+/* =========================================================
+   ANSWER
+========================================================= */
+
+function answer(choice, selectedButton) {
+
+    if (quizLocked) {
+        return;
+    }
+
+
+    quizLocked = true;
+
+
+    let correct =
+        questions[currentQuestion].answer;
+
+
+    let buttons =
+        document.querySelectorAll(".quiz-option");
+
+
+    buttons.forEach(function(button) {
+
+        button.disabled = true;
+
+
+        if (
+            button.innerText === correct
+        ) {
+
+            button.classList.add("correct");
+
+        }
+
+    });
+
+
+    if (choice === correct) {
+
+        points += 10;
+
+
+        selectedButton.classList.add("correct");
+
+
+        document.getElementById("quizFeedback").innerText =
+            "Correct! +10 points";
+
+
+        document.getElementById("quizFeedback").style.color =
+            "var(--green-dark)";
+
+
+    } else {
+
+        selectedButton.classList.add("wrong");
+
+
+        document.getElementById("quizFeedback").innerText =
+            "Not quite! The correct answer was " +
+            correct;
+
+
+        document.getElementById("quizFeedback").style.color =
+            "#9c3f32";
+
+    }
+
+
+    document.getElementById("score").innerText =
+        "Points: " +
+        points;
+
+
+    document.getElementById("quizScore").innerText =
+        points +
+        " points";
+
+
+    /* Automatically move to next question */
+
+    setTimeout(function() {
+
+        nextQuestion();
+
+    }, 1000);
+
+}
+
+
+/* =========================================================
+   NEXT QUESTION
+========================================================= */
+
+function nextQuestion() {
+
+    currentQuestion++;
+
+
+    if (
+        currentQuestion >=
+        questions.length
+    ) {
+
+        finishQuiz();
+
+        return;
+    }
+
+
+    loadQuestion();
+
+}
+
+
+/* =========================================================
+   FINISH QUIZ
+========================================================= */
+
+function finishQuiz() {
+
+    document.getElementById("questionNumber").innerText =
+        "Quiz Complete!";
+
+
+    document.getElementById("question").innerText =
+        "You completed the Culture Quest.";
+
+
+    document.getElementById("quizOptions").innerHTML =
+        "";
+
+
+    document.getElementById("progressBar").style.width =
+        "100%";
+
+
+    document.getElementById("quizFeedback").innerText =
+        "Final score: " +
+        points +
+        " points";
+
+
+    document.getElementById("quizFeedback").style.color =
+        "var(--green-dark)";
+
+
+    document.getElementById("score").innerText =
+        "You scored " +
+        points +
+        " / " +
+        (questions.length * 10);
+
+
+    document.getElementById("restartButton").style.display =
+        "inline-block";
+
+}
+
+
+/* =========================================================
+   RESTART QUIZ
+========================================================= */
+
+function restartQuiz() {
+
+    currentQuestion = 0;
+
+    points = 0;
+
+    document.getElementById("restartButton").style.display =
+        "none";
+
+
+    loadQuestion();
+
+}
+
+
+/* =========================================================
+   SCROLL ANIMATIONS
+========================================================= */
+
+const observer =
+    new IntersectionObserver(
+
+        function(entries) {
+
+            entries.forEach(function(entry) {
+
+                if (entry.isIntersecting) {
+
+                    entry.target.classList.add("visible");
+
+                }
+
+            });
+
+        },
+
+        {
+            threshold: 0.15
+        }
+
+    );
+
+
+document
+    .querySelectorAll(".reveal")
+    .forEach(function(element) {
+
+        observer.observe(element);
+
+    });
+
+
+/* =========================================================
+   START QUIZ
+========================================================= */
+
+loadQuestion();
+
+
+</script>
+
+
+</body>
+
+</html>

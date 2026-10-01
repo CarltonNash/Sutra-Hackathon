@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>sutrā — Cultural Marketplace</title>
+
+<style>
+
+:root {
+    --brown-dark: #3b2418;
+    --brown: #70452d;
+    --brown-light: #9a6748;
+    --beige: #f4ead8;
+    --cream: #fffaf1;
+    --sand: #dfc7a8;
+    --gold: #b78b52;
+    --text: #35231a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Georgia, "Times New Roman", serif;
+    background: var(--cream);
+    color: var(--text);
+}
+
+/* NAVBAR */
+
+.navbar {
+    height: 75px;
+    background: var(--brown-dark);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6%;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.12);
+}
+
+.logo {
+    font-size: 30px;
+    letter-spacing: 3px;
+    font-weight: bold;
+}
+
+.nav-links {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.nav-links a:hover {
+    color: #e4c59f;
+}
+
+.sell-btn {
+    background: var(--gold);
+    padding: 11px 18px;
+    border-radius: 25px;
+    color: white !important;
+}
+
+/* HERO */
+
+.hero {
+    padding: 70px 7% 55px;
+    background:
+        radial-gradient(circle at 80% 20%, rgba(183,139,82,0.22), transparent 30%),
+        linear-gradient(135deg, #f5ead7, #fffaf1);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::before {
+    content: "✦";
+    position: absolute;
+    font-size: 180px;
+    right: 5%;
+    top: -30px;
+    color: rgba(112,69,45,0.06);
+}
+
+.hero h1 {
+    font-size: clamp(42px, 6vw, 78px);
+    max-width: 750px;
+    line-height: 0.98;
+    animation: fadeUp 0.8s ease;
+}
+
+.hero h1 span {
+    color: var(--brown-light);
+    font-style: italic;
+}
+
+.hero p {
+    max-width: 650px;
+    margin-top: 22px;
+    line-height: 1.7;
+    font-size: 17px;
+    color: #60493b;
+    animation: fadeUp 1s ease;
+}
+
+.hero-tag {
+    display: inline-block;
+    margin-bottom: 18px;
+    background: var(--brown-dark);
+    color: white;
+    padding: 8px 16px;
+    border-radius: 30px;
+    font-size: 12px;
+    letter-spacing: 2px;
+}
+
+/* SEARCH */
+
+.market-tools {
+    padding: 35px 7% 10px;
+}
+
+.search-box {
+    display: flex;
+    gap: 15px;
+    max-width: 750px;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 17px 22px;
+    border: 1px solid #d3bda2;
+    border-radius: 40px;
+    background: white;
+    outline: none;
+    font-family: inherit;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.search-box input:focus {
+    box-shadow: 0 0 0 4px rgba(183,139,82,0.15);
+}
+
+.filter {
+    padding: 0 20px;
+    border-radius: 40px;
+    border: none;
+    background: var(--brown-dark);
+    color: white;
+    cursor: pointer;
+}
+
+/* CATEGORY */
+
+.categories {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 25px 7%;
+}
+
+.category {
+    white-space: nowrap;
+    padding: 10px 18px;
+    border: 1px solid #cbb293;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.3s;
+    background: white;
+}
+
+.category:hover,
+.category.active {
+    background: var(--brown-dark);
+    color: white;
+}
+
+/* PRODUCTS */
+
+.products-section {
+    padding: 20px 7% 80px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    margin: 30px 0;
+}
+
+.section-heading h2 {
+    font-size: 35px;
+}
+
+.section-heading p {
+    color: #806b5b;
+}
+
+.product-grid {
+    columns: 4 220px;
+    column-gap: 20px;
+}
+
+.product-card {
+    break-inside: avoid;
+    margin-bottom: 25px;
+    background: white;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 7px 25px rgba(59,36,24,0.08);
+    transition: 0.35s ease;
+    cursor: pointer;
+    position: relative;
+    animation: cardAppear 0.7s ease both;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 18px 35px rgba(59,36,24,0.17);
+}
+
+.product-image {
+    width: 100%;
+    height: auto;
+    min-height: 240px;
+    object-fit: cover;
+    display: block;
+}
+
+.product-info {
+    padding: 18px;
+}
+
+.product-origin {
+    color: var(--brown-light);
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.product-name {
+    font-size: 22px;
+    margin: 8px 0;
+}
+
+.product-description {
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    color: #766357;
+    line-height: 1.5;
+}
+
+.product-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.price {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.view-btn {
+    background: var(--brown-dark);
+    color: white;
+    padding: 9px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+/* HEART */
+
+.heart {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.92);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    z-index: 2;
+    transition: 0.3s;
+}
+
+.heart:hover {
+    transform: scale(1.15);
+}
+
+.heart.saved {
+    background: var(--brown-dark);
+    color: white;
+}
+
+/* CULTURAL STRIP */
+
+.culture-strip {
+    background: var(--brown-dark);
+    color: white;
+    padding: 65px 7%;
+    text-align: center;
+}
+
+.culture-strip h2 {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.culture-strip p {
+    max-width: 700px;
+    margin: auto;
+    line-height: 1.8;
+    color: #e9d9c4;
+}
+
+/* SELL */
+
+.sell-section {
+    padding: 70px 7%;
+    text-align: center;
+    background: var(--beige);
+}
+
+.sell-section h2 {
+    font-size: 38px;
+}
+
+.sell-section p {
+    margin: 15px auto 25px;
+    max-width: 600px;
+    line-height: 1.7;
+}
+
+.sell-now {
+    border: none;
+    background: var(--brown-dark);
+    color: white;
+    padding: 15px 28px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+/* EMPTY */
+
+.no-results {
+    display: none;
+    text-align: center;
+    padding: 50px;
+}
+
+/* ANIMATIONS */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* MOBILE */
+
+@media(max-width: 700px) {
+
+    .navbar {
+        padding: 0 20px;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hero {
+        padding: 50px 25px;
+    }
+
+    .market-tools,
+    .products-section {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .categories {
+        padding-left: 25px;
+    }
+
+    .product-grid {
+        columns: 2 150px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">sutrā</div>
+
+    <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="marketplace.html">Marketplace</a>
+        <a href="#">Discover</a>
+        <a href="#">Stories</a>
+        <a href="sell.html" class="sell-btn">Sell Your Craft</a>
+    </div>
+
+</nav>
+
+
+<section class="hero">
+
+    <div class="hero-tag">THE SUTRĀ MARKETPLACE</div>
+
+    <h1>
+        Buy something that
+        <span>means something.</span>
+    </h1>
+
+    <p>
+        Discover handmade objects, traditional crafts and cultural treasures
+        directly from the people and places that keep these traditions alive.
+    </p>
+
+</section>
+
+
+<div class="market-tools">
+
+    <div class="search-box">
+
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Discover a craft, place or tradition..."
+            onkeyup="searchProducts()"
+        >
+
+        <button class="filter" onclick="searchProducts()">
+            Discover
+        </button>
+
+    </div>
+
+</div>
+
+
+<div class="categories">
+
+    <div class="category active" onclick="filterCategory('all', this)">
+        All
+    </div>
+
+    <div class="category" onclick="filterCategory('textile', this)">
+        Textiles
+    </div>
+
+    <div class="category" onclick="filterCategory('pottery', this)">
+        Pottery
+    </div>
+
+    <div class="category" onclick="filterCategory('jewellery', this)">
+        Jewellery
+    </div>
+
+    <div class="category" onclick="filterCategory('art', this)">
+        Art
+    </div>
+
+    <div class="category" onclick="filterCategory('craft', this)">
+        Crafts
+    </div>
+
+</div>
+
+
+<section class="products-section">
+
+    <div class="section-heading">
+
+        <div>
+            <h2>Curated from culture</h2>
+            <p>Every object carries a story.</p>
+        </div>
+
+    </div>
+
+
+    <div class="product-grid" id="productGrid">
+
+
+        <!-- PRODUCT 1 -->
+
+        <div class="product-card"
+             data-category="textile"
+             data-name="Kalamkari Saree"
+             onclick="openProduct('kalamkari')">
+
+            <div class="heart"
+                 onclick="saveProduct(event,this)">
+                ♡
+            </div>
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=800&q=80"
+                alt="Traditional Indian textile"
+            >
+
+            <div class="product-info">
+
+                <div class="product-origin">
+                    Machilipatnam, Andhra Pradesh
+                </div>
+
+                <div class="product-name">
+                    Kalamkari Saree
+                </div>
+
+                <div class="product-description">
+                    Hand-painted textile inspired by traditional Indian storytelling.
+                </div>
+
+                <div class="product-bottom">
+
+                    <span class="price">
+                        ₹3,800
+                    </span>
+
+                    <span class="view-btn">
+                        Explore →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 2 -->
+
+        <div class="product-card"
+             data-category="pottery"
+             data-name="Blue Pottery"
+             onclick="openProduct('bluepottery')">
+
+            <div class="heart"
+                 onclick="saveProduct(event,this)">
+                ♡
+            </div>
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=800&q=80"
+                alt="Handmade pottery"
+            >
+
+            <div class="product-info">
+
+                <div class="product-origin">
+                    Jaipur, Rajasthan
+                </div>
+
+                <div class="product-name">
+                    Blue Pottery Bowl
+                </div>
+
+                <div class="product-description">
+                    Distinctive blue-and-white craft traditionally associated with Jaipur.
+                </div>
+
+                <div class="product-bottom">
+
+                    <span class="price">
+                        ₹950
+                    </span>
+
+                    <span class="view-btn">
+                        Explore →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 3 -->
+
+        <div class="product-card"
+             data-category="jewellery"
+             data-name="Dhokra Necklace"
+             onclick="openProduct('dhokra')">
+
+            <div class="heart"
+                 onclick="saveProduct(event,this)">
+                ♡
+            </div>
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=800&q=80"
+                alt="Traditional jewellery"
+            >
+
+            <div class="product-info">
+
+                <div class="product-origin">
+                    Chhattisgarh, India
+                </div>
+
+                <div class="product-name">
+                    Dhokra Necklace
+                </div>
+
+                <div class="product-description">
+                    Metal craft inspired by the ancient lost-wax casting tradition.
+                </div>
+
+                <div class="product-bottom">
+
+                    <span class="price">
+                        ₹1,450
+                    </span>
+
+                    <span class="view-btn">
+                        Explore →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 4 -->
+
+        <div class="product-card"
+             data-category="art"
+             data-name="Madhubani Painting"
+             onclick="openProduct('madhubani')">
+
+            <div class="heart"
+                 onclick="saveProduct(event,this)">
+                ♡
+            </div>
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1577083552431-6e5fd01aa342?auto=format&fit=crop&w=800&q=80"
+                alt="Traditional artwork"
+            >
+
+            <div class="product-info">
+
+                <div class="product-origin">
+                    Bihar, India
+                </div>
+
+                <div class="product-name">
+                    Madhubani Artwork
+                </div>
+
+                <div class="product-description">
+                    Detailed folk artwork featuring symbolic patterns and natural themes.
+                </div>
+
+                <div class="product-bottom">
+
+                    <span class="price">
+                        ₹2,200
+                    </span>
+
+                    <span class="view-btn">
+                        Explore →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 5 -->
+
+        <div class="product-card"
+             data-category="craft"
+             data-name="Bamboo Basket"
+             onclick="openProduct('bamboo')">
+
+            <div class="heart"
+                 onclick="saveProduct(event,this)">
+                ♡
+            </div>
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1590736969955-71cc94901144?auto=format&fit=crop&w=800&q=80"
+                alt="Handwoven basket"
+            >
+
+            <div class="product-info">
+
+                <div class="product-origin">
+                    Assam, India
+                </div>
+
+                <div class="product-name">
+                    Handwoven Bamboo Basket
+                </div>
+
+                <div class="product-description">
+                    Sustainable handwoven craft made using locally sourced bamboo.
+                </div>
+
+                <div class="product-bottom">
+
+                    <span class="price">
+                        ₹780
+                    </span>
+
+                    <span class="view-btn">
+                        Explore →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 6 -->
+
+        <div class="product-card"
+             data-category="textile"
+             data-name="Banarasi Dupatta"
+             onclick="openProduct('banarasi')">
+
+            <div class="heart"
+                 onclick="saveProduct(event,this)">
+                ♡
+            </div>
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1605763240000-7e93b172d754?auto=format&fit=crop&w=800&q=80"
+                alt="Indian textile"
+            >
+
+            <div class="product-info">
+
+                <div class="product-origin">
+                    Varanasi, Uttar Pradesh
+                </div>
+
+                <div class="product-name">
+                    Banarasi Dupatta
+                </div>
+
+                <div class="product-description">
+                    Rich woven textile associated with the historic weaving traditions of Varanasi.
+                </div>
+
+                <div class="product-bottom">
+
+                    <span class="price">
+                        ₹2,750
+                    </span>
+
+                    <span class="view-btn">
+                        Explore →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 7 -->
+
+        <div class="product-card"
+             data-category="pottery"
+             data-name="Terracotta Lamp"
+             onclick="openProduct('terracotta')">
+
+            <div class="heart"
+                 onclick="saveProduct(event,this)">
+                ♡
+            </div>
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=800&q=80"
+                alt="Terracotta craft"
+            >
+
+            <div class="product-info">
+
+                <div class="product-origin">
+                    West Bengal, India
+                </div>
+
+                <div class="product-name">
+                    Terracotta Lamp
+                </div>
+
+                <div class="product-description">
+                    Earth-toned handmade lamp reflecting India's long relationship with clay craft.
+                </div>
+
+                <div class="product-bottom">
+
+                    <span class="price">
+                        ₹620
+                    </span>
+
+                    <span class="view-btn">
+                        Explore →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUCT 8 -->
+
+        <div class="product-card"
+             data-category="craft"
+             data-name="Wooden Mask"
+             onclick="openProduct('mask')">
+
+            <div class="heart"
+                 onclick="saveProduct(event,this)">
+                ♡
+            </div>
+
+            <img
+                class="product-image"
+                src="https://images.unsplash.com/photo-1577083288073-40892c0860a4?auto=format&fit=crop&w=800&q=80"
+                alt="Traditional mask"
+            >
+
+            <div class="product-info">
+
+                <div class="product-origin">
+                    Kerala, India
+                </div>
+
+                <div class="product-name">
+                    Hand-carved Wooden Mask
+                </div>
+
+                <div class="product-description">
+                    Decorative wooden craft inspired by South Indian performance traditions.
+                </div>
+
+                <div class="product-bottom">
+
+                    <span class="price">
+                        ₹1,850
+                    </span>
+
+                    <span class="view-btn">
+                        Explore →
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <div class="no-results" id="noResults">
+        <h3>No cultural treasures found.</h3>
+        <p>Try another craft, place or tradition.</p>
+    </div>
+
+</section>
+
+
+<section class="culture-strip">
+
+    <h2>Not just a product.</h2>
+
+    <p>
+        Every object has a place, a maker and a story.
+        sutrā brings the cultural context with the craft —
+        so discovering something beautiful can also mean discovering
+        where it came from and why it matters.
+    </p>
+
+</section>
+
+
+<section class="sell-section">
+
+    <h2>Have a story worth selling?</h2>
+
+    <p>
+        Give your craft a digital home. Share your work,
+        your community and the story behind what you create.
+    </p>
+
+    <button class="sell-now" onclick="window.location.href='sell.html'">
+        Start Selling →
+    </button>
+
+</section>
+
+
+<script>
+
+/* PRODUCT NAVIGATION */
+
+function openProduct(product) {
+
+    window.location.href =
+        "product.html?product=" + product;
+
+}
+
+
+/* SAVE PRODUCT */
+
+function saveProduct(event, element) {
+
+    event.stopPropagation();
+
+    element.classList.toggle("saved");
+
+    if(element.classList.contains("saved")) {
+
+        element.innerHTML = "♥";
+
+    } else {
+
+        element.innerHTML = "♡";
+
+    }
+
+}
+
+
+/* SEARCH */
+
+function searchProducts() {
+
+    let search =
+        document.getElementById("searchInput")
+        .value
+        .toLowerCase();
+
+    let cards =
+        document.querySelectorAll(".product-card");
+
+    let found = 0;
+
+    cards.forEach(card => {
+
+        let name =
+            card.dataset.name.toLowerCase();
+
+        let category =
+            card.dataset.category.toLowerCase();
+
+        let text =
+            card.innerText.toLowerCase();
+
+        if(
+            name.includes(search) ||
+            category.includes(search) ||
+            text.includes(search)
+        ) {
+
+            card.style.display = "block";
+            found++;
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+    document.getElementById("noResults").style.display =
+        found === 0 ? "block" : "none";
+
+}
+
+
+/* CATEGORY FILTER */
+
+function filterCategory(category, element) {
+
+    document
+        .querySelectorAll(".category")
+        .forEach(c => c.classList.remove("active"));
+
+    element.classList.add("active");
+
+    let cards =
+        document.querySelectorAll(".product-card");
+
+    cards.forEach(card => {
+
+        if(
+            category === "all" ||
+            card.dataset.category === category
+        ) {
+
+            card.style.display = "block";
+
+        } else {
+
+            card.style.display = "none";
+
+        }
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>

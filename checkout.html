@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>sutrā — Checkout</title>
+
+<style>
+
+:root {
+    --brown-dark: #3b2418;
+    --brown: #70452d;
+    --brown-light: #9a6748;
+    --beige: #f4ead8;
+    --cream: #fffaf1;
+    --gold: #b78b52;
+    --text: #35231a;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background:
+        radial-gradient(circle at top right,
+        rgba(183,139,82,0.18),
+        transparent 30%),
+        var(--cream);
+
+    color: var(--text);
+    font-family: Georgia, serif;
+}
+
+.navbar {
+    height: 75px;
+    background: var(--brown-dark);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 7%;
+}
+
+.logo {
+    font-size: 30px;
+    letter-spacing: 3px;
+}
+
+.back {
+    color: white;
+    text-decoration: none;
+}
+
+.checkout {
+    max-width: 950px;
+    margin: 60px auto;
+    padding: 0 25px;
+}
+
+.checkout h1 {
+    font-size: 45px;
+    margin-bottom: 35px;
+}
+
+.checkout-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+}
+
+.box {
+    background: white;
+    padding: 30px;
+    border-radius: 22px;
+    box-shadow: 0 10px 35px rgba(59,36,24,0.08);
+}
+
+.box h2 {
+    margin-bottom: 25px;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid #d6c1a6;
+    outline: none;
+    font-family: inherit;
+}
+
+.payment-option {
+    border: 1px solid #d6c1a6;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.payment-option:hover {
+    background: var(--beige);
+}
+
+.payment-option input {
+    width: auto;
+    margin: 0 10px 0 0;
+}
+
+.product-summary {
+    background: var(--beige);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+}
+
+.total {
+    display: flex;
+    justify-content: space-between;
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.pay-btn {
+    width: 100%;
+    margin-top: 25px;
+    padding: 17px;
+    background: var(--brown-dark);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+.demo {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 12px;
+    color: #876f5d;
+}
+
+.success {
+    display: none;
+    text-align: center;
+    padding: 50px 20px;
+}
+
+.success h2 {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.success p {
+    line-height: 1.7;
+}
+
+@media(max-width:750px) {
+
+    .checkout-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<nav class="navbar">
+
+    <div class="logo">
+        sutrā
+    </div>
+
+    <a href="marketplace.html" class="back">
+        ← Marketplace
+    </a>
+
+</nav>
+
+
+<div class="checkout">
+
+    <h1>
+        Complete your purchase.
+    </h1>
+
+
+    <div class="checkout-grid">
+
+
+        <!-- DELIVERY -->
+
+        <div class="box">
+
+            <h2>
+                Delivery details
+            </h2>
+
+            <input
+                type="text"
+                placeholder="Full name"
+            >
+
+            <input
+                type="text"
+                placeholder="Phone number"
+            >
+
+            <input
+                type="text"
+                placeholder="Address"
+            >
+
+            <input
+                type="text"
+                placeholder="City"
+            >
+
+            <input
+                type="text"
+                placeholder="PIN code"
+            >
+
+        </div>
+
+
+        <!-- PAYMENT -->
+
+        <div class="box">
+
+            <h2>
+                Payment
+            </h2>
+
+            <div class="product-summary">
+
+                <strong id="productName">
+                    Cultural Product
+                </strong>
+
+                <br><br>
+
+                <span id="productPrice">
+                    ₹0
+                </span>
+
+            </div>
+
+
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="payment"
+                    checked
+                >
+
+                UPI
+
+            </label>
+
+
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="payment"
+                >
+
+                Credit / Debit Card
+
+            </label>
+
+
+            <label class="payment-option">
+
+                <input
+                    type="radio"
+                    name="payment"
+                >
+
+                Net Banking
+
+            </label>
+
+
+            <div class="total">
+
+                <span>
+                    Total
+                </span>
+
+                <span id="total">
+                    ₹0
+                </span>
+
+            </div>
+
+
+            <button
+                class="pay-btn"
+                onclick="completePayment()"
+            >
+                Pay Securely →
+            </button>
+
+            <div class="demo">
+                Prototype payment — no real money will be charged.
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="success" id="success">
+
+        <h2>
+            Thank you for supporting culture.
+        </h2>
+
+        <p>
+            Your prototype order has been placed successfully.
+            <br>
+            You just helped a cultural craft travel from its maker
+            to a new home.
+        </p>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const products = {
+
+    kalamkari: ["Kalamkari Saree", "₹3,800"],
+
+    bluepottery: ["Blue Pottery Bowl", "₹950"],
+
+    dhokra: ["Dhokra Necklace", "₹1,450"],
+
+    madhubani: ["Madhubani Artwork", "₹2,200"],
+
+    bamboo: ["Handwoven Bamboo Basket", "₹780"],
+
+    banarasi: ["Banarasi Dupatta", "₹2,750"],
+
+    terracotta: ["Terracotta Lamp", "₹620"],
+
+    mask: ["Hand-carved Wooden Mask", "₹1,850"]
+
+};
+
+
+const params =
+new URLSearchParams(window.location.search);
+
+const productId =
+params.get("product") || "kalamkari";
+
+const product =
+products[productId];
+
+
+if(product) {
+
+    document.getElementById("productName")
+        .innerText = product[0];
+
+    document.getElementById("productPrice")
+        .innerText = product[1];
+
+    document.getElementById("total")
+        .innerText = product[1];
+
+}
+
+
+function completePayment() {
+
+    document.querySelector(".checkout-grid")
+        .style.display = "none";
+
+    document.querySelector(".checkout h1")
+        .style.display = "none";
+
+    document.getElementById("success")
+        .style.display = "block";
+
+}
+
+</script>
+
+</body>
+
+</html>
