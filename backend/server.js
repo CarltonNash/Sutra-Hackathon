@@ -40,7 +40,7 @@ Artwork: ${artworkName}
 Artist: ${artistName || "Unknown"}
 
 Start exactly with:
-"Namaste, I am Sutrā, your AI art guide. Let us explore this artwork."
+"Hi, I'm Ashton, your AI art guide. Let us explore this artwork."
 
 Then provide ALL of these sections with actual content:
 
