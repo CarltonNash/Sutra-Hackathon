@@ -2901,7 +2901,7 @@ footer p {
 >
 
     <h3>
-        Sutrā AI
+        Ashton AI
     </h3>
 
     <p style="margin-top:8px;color:#806653;">
@@ -4463,27 +4463,40 @@ function toggleAI() {
 }
 
 
-function askAI() {
-
-    let question =
-        document.getElementById("aiQuestion").value.trim();
-
-    let answer =
-        document.getElementById("aiAnswer");
-
+async function askAI() {
+    const question = document.getElementById("aiQuestion").value.trim();
+    const answer = document.getElementById("aiAnswer");
 
     if (!question) {
-
-        answer.innerText =
-            "Ask me anything about culture!";
-
+        answer.innerText = "Ask me anything about culture!";
         return;
     }
 
+    answer.innerText = "Ashton is thinking...";
 
-    answer.innerText =
-        "That's a fascinating thread to explore. Sutrā would connect your question with artists, traditions, stories and communities.";
+    try {
+        const response = await fetch("http://localhost:5000/api/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: question
+            })
+        });
 
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(data.error || "Something went wrong");
+        }
+
+        answer.innerText = data.reply;
+
+    } catch (error) {
+        console.error("Ashton AI error:", error);
+        answer.innerText = "Sorry, I couldn't connect to Ashton right now.";
+    }
 }
 
 
